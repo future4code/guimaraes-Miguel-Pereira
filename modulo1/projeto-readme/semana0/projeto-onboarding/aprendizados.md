@@ -1,0 +1,2 @@
+# Aprendizados da semana
+Durante esta semana aprendi a como executar comandos no **Terminal**, desenvolver projetos e enlouquecer no **Git** e salva-los no **Github**. Até então estou adorando o curso apesar do estresse constante com o Git e o Github kkkkkk. 
