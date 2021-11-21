@@ -114,21 +114,38 @@ function retornaUltimoElemento(array) {
 // EXERCÍCIO 11
 function trocaPrimeiroEUltimo(array) {
   // implemente sua lógica aqui
+  let first = array[0]
+  let last = array[array.length -1]
+
+  array[0] = last
+  array [array.length -1] = first
+
+  return array
 
 }
 
 // EXERCÍCIO 12
 function checaIgualdadeDesconsiderandoCase(string1, string2) {
   // implemente sua lógica aqui
+  return string1.toLowerCase() === string2.toLowerCase()
 
 }
 
 // EXERCÍCIO 13
+
 function checaRenovacaoRG() {
   // implemente sua lógica aqui
+  let idade = anoAtual - anoNascimento
+  let cnh = anoAtual - anoCNH
+  
+  let renova20Anos
 
 }
 
+/* let anoAtual = Number(prompt("Qual o ano atual?"))
+let anoNascimento = Number(prompt("Em que ano você nasceu?"))
+let anoCNH = Number(prompt("Em que ano foi emitida sua CNH?"))
+ */
 // EXERCÍCIO 14
 function checaAnoBissexto(ano) {
   // implemente sua lógica aqui
@@ -138,5 +155,10 @@ function checaAnoBissexto(ano) {
 // EXERCÍCIO 15
 function checaValidadeInscricaoLabenu() {
   // implemente sua lógica aqui
+  let idade = prompt("Você tem mais de 18 anos?")
+  let escolaridade = prompt("Você tem ensino médio completo?")
+  let disponibilidade = prompt("Você possui disponibilidade nos horários do curso?")
 
+  let a = idade && escolaridade && disponibililidade
+  console.log(a)
 }
