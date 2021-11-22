@@ -156,9 +156,32 @@ function checaAnoBissexto(ano) {
 function checaValidadeInscricaoLabenu() {
   // implemente sua lógica aqui
   let idade = prompt("Você tem mais de 18 anos?")
+
+  if(idade === "sim"){
+    idade = true
+  }else{
+    idade = false
+  }
+
   let escolaridade = prompt("Você tem ensino médio completo?")
+  
+  if(escolaridade === "sim"){
+    escolaridade = true}
+  else{
+    escolaridade = false
+  }
+
   let disponibilidade = prompt("Você possui disponibilidade nos horários do curso?")
 
-  let a = idade && escolaridade && disponibililidade
-  console.log(a)
+  if(disponibilidade === "sim"){
+    disponibilidade = true
+  }else{
+    disponibilidade = false
+  }
+  
+  if(idade && escolaridade && disponibilidade === true){
+    console.log(true)
+  }else{
+    console.log(false)
+  }
 }
