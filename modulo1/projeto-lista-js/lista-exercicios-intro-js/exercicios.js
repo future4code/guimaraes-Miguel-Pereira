@@ -114,6 +114,7 @@ function retornaUltimoElemento(array) {
 // EXERCÍCIO 11
 function trocaPrimeiroEUltimo(array) {
   // implemente sua lógica aqui
+
   let first = array[0]
   let last = array[array.length -1]
 
@@ -121,14 +122,13 @@ function trocaPrimeiroEUltimo(array) {
   array [array.length -1] = first
 
   return array
-
 }
 
 // EXERCÍCIO 12
 function checaIgualdadeDesconsiderandoCase(string1, string2) {
   // implemente sua lógica aqui
-  return string1.toLowerCase() === string2.toLowerCase()
 
+  return string1.toLowerCase() === string2.toLowerCase()
 }
 
 // EXERCÍCIO 13
@@ -139,13 +139,12 @@ function checaRenovacaoRG() {
   let cnh = anoAtual - anoCNH
   
   let renova20Anos
-
 }
 
 /* let anoAtual = Number(prompt("Qual o ano atual?"))
 let anoNascimento = Number(prompt("Em que ano você nasceu?"))
 let anoCNH = Number(prompt("Em que ano foi emitida sua CNH?"))
- */
+
 // EXERCÍCIO 14
 function checaAnoBissexto(ano) {
   // implemente sua lógica aqui
