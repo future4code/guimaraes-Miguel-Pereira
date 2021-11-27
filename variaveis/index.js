@@ -60,16 +60,11 @@ console.log(a,b) */
 
 /* || Desafio ||*/
 
+/* let numeroUm = Number(prompt("Digite um número"))
+let numeroDois = Number(prompt("Digite outro numero"))
 
+const soma = numeroUm + numeroDois
+const multiplicacao = numeroUm * numeroDois
 
-/*
-let numeroUm = prompt("Digite um número")
-let numeroDois = prompt("Digite outro numero")
-const resposta1 = Number(numeroUm)
-const resposta2 = Number(numeroDois)
-
-let x = resposta1 + resposta2
-let y = resposta1 * resposta2
-
-console.log(x)
-console.log(y)*/
+console.log(`${numeroUm} + ${numeroDois} = ${soma}`)
+console.log(`${numeroUm} * ${numeroDois} = ${multiplicacao}`) */
