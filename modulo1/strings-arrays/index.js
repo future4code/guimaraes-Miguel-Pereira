@@ -69,3 +69,26 @@ indiceNumero = Number(indice)
 
 listaDeTarefas.splice(indiceNumero, 1)
 console.log(listaDeTarefas)*/
+
+
+
+//---- Desafios ----
+
+
+
+//1.
+/* const frase = () =>{
+    const fraseArray = ['Olá','meu','nome','é','Miguel']
+ 
+    return fraseArray
+}
+console.log(frase().concat())
+
+//2.
+const array = ["Banana", "Morango", "Abacaxi","Laranja", "Ameixa"]
+
+    let indice = array[2]
+    let tamanho = array[2].length
+
+console.log(`palavra: ${indice} 
+Tamanho: ${tamanho}`) */
