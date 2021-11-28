@@ -118,3 +118,23 @@ console.log(subtracao(a,b))
 console.log(multiplicacao(a,b))
 console.log(divisao(a,b)) */
 
+
+
+//---- Desafios ----
+
+
+
+//1. a.
+
+const funcao1 = (num1) => {
+    const numero = num1
+
+    return numero
+}
+console.log(funcao1(5))
+
+// b.
+const funcao2 = (num2, num3) => {
+    const soma = num2 + num3
+}
+console.log(funcao2(4, 5))
