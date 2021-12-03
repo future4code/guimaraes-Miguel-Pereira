@@ -116,31 +116,36 @@
 
 
 
-//1.
-const pokemons =[
-    { nome: "Bulbasaur", tipo: "grama" },
-    { nome: "Bellsprout", tipo: "grama" },
-    { nome: "Charmander", tipo: "fogo" },
-    { nome: "Vulpix", tipo: "fogo" },
-    { nome: "Squirtle", tipo: "água" },
-    { nome: "Psyduck", tipo: "água" }
-]
+// //1.
+// const pokemons =[
+//     { nome: "Bulbasaur", tipo: "grama" },
+//     { nome: "Bellsprout", tipo: "grama" },
+//     { nome: "Charmander", tipo: "fogo" },
+//     { nome: "Vulpix", tipo: "fogo" },
+//     { nome: "Squirtle", tipo: "água" },
+//     { nome: "Psyduck", tipo: "água" }
+// ]
 
-//a.
-const listaDePokemons = pokemons.map((item, indice, array) =>{
-    return item.nome
-})
+// //a.
+// const listaDePokemons = pokemons.map((item, indice, array) =>{
+//     return item.nome
+// })
 
-const nomesEmOA = listaDePokemons.sort()
+// const nomesEmOA = listaDePokemons.sort()
 
-console.log(nomesEmOA)
+// console.log(nomesEmOA)
 
-//b.
-const tiposDePokemons = pokemons.map((item, indice, array) => {
-    return item.tipo
-})
-console.log(tiposDePokemons)
+// //b.
+// const tiposDePokemons = pokemons.map((item, indice, array) => {
+//     return item.tipo
+// })
+// console.log(tiposDePokemons)
 
-const tiposEmOA = tiposDePokemons
+// const pokemonsSemRepetir = tiposDePokemons.filter((item, indice) => {
+//     return indice === tiposDePokemons.indexOf(item)
+// })
+//     console.log(pokemonsSemRepetir)
 
-console.log(tiposEmOA)
+//     const pokemonsEmOrdem = pokemonsSemRepetir.sort()
+
+//     console.log(pokemonsEmOrdem)
