@@ -48,10 +48,10 @@
 //      valor += carta.valor
 //    }
 //    if(valor <= 21){
-//       let ConfirmaCompra = confirm(`Suas cartas são ${jogador[0].texto} ${jogador[1].texto}. A carta revelada do computador é ${computador[0].texto}
+//       let comprarUmaCarta = confirm(`Suas cartas são ${jogador[0].texto} ${jogador[1].texto}. A carta revelada do computador é ${computador[0].texto}
 //       `+ '\n' + 'Deseja comprar mais uma carta?')
 //    } else {
-//       comfirmaCompra = false
+//       comprarUmaCarta = false
 //    }
 
 // }
