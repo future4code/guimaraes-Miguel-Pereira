@@ -100,9 +100,9 @@ if (ladoA !== ladoB && ladoB !== ladoC && ladoC !== ladoA){
 
 // EXERCÍCIO 10
 function retornaSegundoMaiorESegundoMenor(array) {
-    let novoArray = []
-
+ 
 }
+
 
 // EXERCÍCIO 11
 function retornaChamadaDeFilme(filme) {
@@ -111,23 +111,24 @@ function retornaChamadaDeFilme(filme) {
 
 // EXERCÍCIO 12
 function retornaPessoaAnonimizada(pessoa) {
-   
+   let novaPessoa = {...pessoa, nome: 'ANÔNIMO'}
+
+   return novaPessoa
 }
 
 // EXERCÍCIO 13A
 function retornaPessoasAutorizadas(pessoas) {
-   
+
 }
 
 // EXERCÍCIO 13B
 function retornaPessoasNaoAutorizadas(pessoas) {
-  
+ 
 }
 
 // EXERCÍCIO 14
 function retornaContasComSaldoAtualizado(contas) {
-
-}
+    
 
 // EXERCÍCIO 15A
 function retornaArrayOrdenadoAlfabeticamente(consultas) {
