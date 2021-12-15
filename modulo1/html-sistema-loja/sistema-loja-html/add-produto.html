@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Adicionar Produto</title>
+</head>
+<body>
+    <div>
+        <p><h1><i>MT Jóias</i></h1></p>
+    </div>
+    
+    <div>
+        <a href="index.html">Página Inicial</a>
+        <a href="ctrl-estoque.html">Controle de Estoque</a>
+        <a href="add-produto.html">Adicionar Produto</a>
+        <a href="funcionarios.html">Funcionários</a>
+    </div>
+
+    
+    <h2>Adicionar Produto</h2>
+    <form action="">
+        <div>
+            <label for="link-foto">Link para foto: </label>
+            <input type="url" placeholder="insira o link" id="link-foto" name="link-foto">
+        </div>
+        <br>
+        <div>
+            <label for="descricao">Descrição do produto: </label>
+            <!-- Adicione o id apropriado para o input abaixo -->
+            <input type="text" placeholder="nome do produto" id="nome" name="descrição">
+        </div>
+        <br>
+        <div>
+            <label for="preco">Preço (em R$): </label>
+            <!-- Adicione o id apropriado e o type para receber números abaixo -->
+            <input type="number" placeholder="valor do produto" id="valor" name="preço">
+        </div>
+        <br>
+        <div>
+            <!-- Preencha as propriedades necessárias para os elementos abaixo -->
+            <label>Quantidade disponível: </label>
+            <input type="number" placeholder="quantidade em estoque" id="estoque" name="quantidade">
+        </div>
+<br>
+        <div class="form-add">
+            <!-- Adicione ao type do botão abaixo o valor para que ele submeta o formulário -->
+            <button type="submit">Adicionar</button> 
+        </div>
+
+    </form>
+
+</body>
+</html>
