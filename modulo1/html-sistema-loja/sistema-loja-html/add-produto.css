@@ -1,0 +1,9 @@
+a{
+    color: white; text-shadow: black 0.1em 0.1em 0.2em;
+    border: 3px outset rgb(2, 189, 2);
+    background-color: green;
+    
+}
+body{
+    background-image:radial-gradient(yellow,green);
+}

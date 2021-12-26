@@ -1,0 +1,20 @@
+a{
+    color: white; text-shadow: black 0.1em 0.1em 0.2em;
+    border: 3px outset rgb(2, 189, 2);
+    background-color: green;
+    
+}
+body{
+    background-image:radial-gradient(yellow,green);
+}
+em{
+    font-size: 75px;
+    color: yellow; text-shadow: black 0.1em 0.1em 0.2em;
+    text-shadow: 0 0 0.2em rgb(182, 182, 27), 0 0 0.2em rgb(182, 182, 27),
+        0 0 0.2em rgb(182, 182, 27)
+}
+h4{
+    font-size: 25px;
+    color:yellow; text-shadow: 0 0 0.2em rgb(182, 182, 27), 0 0 0.2em rgb(182, 182, 27),
+        0 0 0.2em rgb(182, 182, 27)
+}
