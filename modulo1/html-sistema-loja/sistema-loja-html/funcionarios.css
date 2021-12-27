@@ -1,11 +1,13 @@
 a{
     color: white; text-shadow: black 0.1em 0.1em 0.2em;
-    border: 3px outset rgb(2, 189, 2);
-    background-color: green;
-    
+    border: 5px outset rgb(164, 9, 202);
+    background-color: rgb(164, 9, 202);
+}
+.fade{
+    margin-left: 400px;
 }
 body{
-    background-image:radial-gradient(yellow,green);
+    background-image:radial-gradient(rgb(19, 0, 37),rgb(164, 9, 202))
 }
 em{
     font-size: 75px;
