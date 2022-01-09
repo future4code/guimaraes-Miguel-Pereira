@@ -76,16 +76,22 @@ div img {
 }
 
 #container-para-comprar {
+    display: flexbox;
     background-color: #e7eb90;
 }
 
 #container-para-comprar>p {
+    position: relative;
     color: #c44f00;
     padding: 100px 0;
     font-size: 60px;
+    left: 100px;
 }
-
-
+#container-para-comprar>a{
+    position: relative;
+    top: 15%;
+    right:20%;
+}
 /**
   *
   *  ESTILOS COMPRAR 
