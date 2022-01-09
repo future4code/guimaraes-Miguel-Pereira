@@ -70,9 +70,11 @@ div img {
     background-color: #2274a5;
     color: white;
 }
-
-#container-de-descricao>ol {
+#container-de-descricao{
     padding: 15px 0px;
+}
+#container-de-descricao>ol {
+    padding: 20px 0px;
 }
 
 #container-para-comprar {
