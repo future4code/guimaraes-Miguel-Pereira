@@ -7,6 +7,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family:    'Roboto' ,  sans-serif;
 }
 
 h2 {
@@ -19,9 +20,9 @@ h2 {
 input {
     height: 20px;
     width: 500px;
-    border-top: white;
-    border-left: white;
-    border-right: white;
+    border-top:none;
+    border-left: none;
+    border-right: none;
     border-width: 3px;
 }
 
