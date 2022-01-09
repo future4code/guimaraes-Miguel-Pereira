@@ -113,7 +113,8 @@ div:last-child {
 table {
     width: 60%;
     position: relative;
-    left: 25%;
+    left: 20%;
+    text-align: center;
 }
 td img{
     height: 70px;
