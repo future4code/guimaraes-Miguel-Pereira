@@ -1,0 +1,50 @@
+.fade{
+    color: rgb(2, 0, 0); text-shadow: black 0.1em 0.1em 0.2em;
+    border: 10px outset rgb(8, 1, 109);
+    border-right: 10px outset rgb(8, 1, 109) ;
+    background-color: rgb(8, 1, 109);
+    margin-top:50px;
+}
+a{
+    font-size: large;
+    font-stretch: semi-condensed;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif   ;
+    margin-right:100px;
+    color:rgb(250, 244, 244);
+}
+.pagina-inicial{
+    margin-left: 250px;
+}
+header{
+    margin-top: -13mm;
+    margin-right: -2mm;
+    margin-left: -2mm;
+    background-image:radial-gradient(rgb(19, 0, 37),rgb(164, 9, 202));
+}
+.imagem-titulo{
+   right: 100px;
+}
+body{
+    background-color: rgb(83, 67, 104);
+}
+em{
+    margin-left: 450px;
+    font-size: 75px;
+    color: yellow; text-shadow: black 0.1em 0.1em 0.2em;
+    text-shadow: 0 0 0.2em rgb(182, 182, 27), 0 0 0.2em rgb(182, 182, 27),
+        0 0 0.2em rgb(182, 182, 27)
+}
+h4{
+    margin-top: -20px;
+    margin-left: 500px;
+    font-size: 20px;
+    color:yellow; text-shadow: 0 0 0.2em rgb(182, 182, 27), 0 0 0.2em rgb(182, 182, 27),
+        0 0 0.2em rgb(182, 182, 27)
+}
+footer{
+    background-image:radial-gradient(rgb(19, 0, 37),rgb(164, 9, 202));
+    margin-bottom: -30mm;
+    margin-top: 50mm;
+    margin-right: -2mm;
+    margin-left: -2mm;
+}
