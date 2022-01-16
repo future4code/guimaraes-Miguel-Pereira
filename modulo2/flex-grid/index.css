@@ -1,0 +1,27 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+
+
+/* ESTILO HEADER */
+header{
+    background-color: mediumvioletred;
+}
+/* ESTILO NAV */
+nav :hover{
+ background-color: aqua;
+ 
+}
+/* ESTILO MAIN */
+
+/* ESTILO FOOTER */
+footer{
+    background-color: mediumvioletred;
+}
+
+footer>div{
+    position: relative;
+    left: 35%;
+}
