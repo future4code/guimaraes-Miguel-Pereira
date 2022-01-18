@@ -67,3 +67,24 @@ footer{
 footer > div {
     margin: 10px 5px;
 }
+
+@media screen and (min-device-width : 320px) and (max-device-width : 800px) {
+    /* Celulares e Tablets*/
+    body{
+        display: flex;
+        flex-direction: column;
+    }
+
+    main{
+        display: flex;
+        flex-direction: column;
+    }
+    #pesquisar{
+        max-width: 100px;
+    }
+
+    footer{
+        position: relative;
+        bottom: 0;
+    }
+}
