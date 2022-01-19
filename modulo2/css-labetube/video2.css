@@ -6,7 +6,7 @@
 body{ 
     min-height: 100vh;
     display: grid;
-    grid-template-rows: 60px 1fr 60px; 
+    grid-template-rows: 30vh 1fr 30vh; 
     background-color: black;
 }
 
@@ -66,4 +66,21 @@ footer{
 }
 footer > div {
     margin: 10px 5px;
+}
+
+@media screen and (min-device-width : 320px) and (max-device-width : 800px) {
+    /* Celulares e Tablets*/
+    body{
+        display: flex;
+        flex-direction: column;
+    }
+
+    main{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #pesquisar{
+        max-width: 100px;
+    }
 }
