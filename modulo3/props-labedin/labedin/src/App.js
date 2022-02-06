@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import imagemPerfil from './Img/imagemPerfil.jpg'
 import CardGrande from './components/CardGrande/CardGrande';
 import ImagemButton from './components/ImagemButton/ImagemButton';
 import CardPequeno from './components/CardPequeno/CardPequeno';
@@ -10,7 +11,7 @@ function App() {
       <div className="page-section-container">
         <h2>Dados pessoais</h2>
         <CardGrande 
-          imagem=""
+          imagem={imagemPerfil}
           nome="Miguel Tocchetto Pereira" 
           descricao="Oi, eu sou o Miguel. Sou estudante da Labenu em transição de carreira. Adoro esportes e sou muito estrovertido e sociavel,
           gosto de conhecer meus colegas e procuro sempre tratar a todos com respeito e simpatia."
