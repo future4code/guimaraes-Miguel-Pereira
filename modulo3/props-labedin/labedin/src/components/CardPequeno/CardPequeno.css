@@ -1,4 +1,4 @@
-.smallcard-container {
+/* .smallcard-container {
     display: flex;
     align-items:center;
     justify-items: flex-start;
@@ -7,20 +7,20 @@
     margin-bottom: 10px;
     height: 60px;
     width: 550px;
-}
+} */
 
-.smallcard-container > img {
+/* .smallcard-container > img {
     width: 25px;
     margin-right: 10px;
     border-radius: 50%;
-}
+} */
 
-.smallcard-container h4 {
+/* .smallcard-container h4 {
     margin-bottom: 5px;
     margin-right: 5px;
-}
+} */
 
-.smallcard-container h5{
+/* .smallcard-container h5{
     margin-bottom: 3px;
     font-size: small;
-}
+} */

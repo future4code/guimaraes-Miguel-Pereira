@@ -1,9 +1,11 @@
 import React from 'react';
+import styled from 'styled-components'
 import './App.css';
 import imagemPerfil from './Img/imagemPerfil.jpg'
 import CardGrande from './components/CardGrande/CardGrande';
 import ImagemButton from './components/ImagemButton/ImagemButton';
 import CardPequeno from './components/CardPequeno/CardPequeno';
+
 
 function App() {
   return (
