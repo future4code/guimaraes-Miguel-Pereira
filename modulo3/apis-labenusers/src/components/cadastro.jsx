@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import PaginaUser from './paginaUsers';
+import PaginaUser from './users';
 
 const requestCadastro = axios.get('https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users', {
     headers: {
-        Authorization: 'anderson-franciscato-guimaraes' }
+        Authorization: 'miguel-pereira-guimaraes' }
         })
 
 class Cadastro extends Component {
@@ -30,7 +30,7 @@ class Cadastro extends Component {
   }
   axios.post('https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users', body, {
       headers: {
-          Authorization: 'anderson-franciscato-guimaraes'
+          Authorization: 'miguel-pereira-guimaraes'
       }
   })
   .then(response => {

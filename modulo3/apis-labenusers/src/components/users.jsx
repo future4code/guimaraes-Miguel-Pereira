@@ -1,19 +1,19 @@
 import React from "react";
 import axios from "axios";
 
-class Cadastro extends React.Component {
+class User extends React.Component {
     state = {
         usuarios: []
     }
-    deletarUsuario = (usuarioId) => {
-        axios.delete(https='us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${usuarioId}', {
+    deletUser = (usuarioId) => {
+        axios.delete(`https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${usuarioId}`, {
             headers: {
-                Authorization: "anderson-franciscato-guimaraes"
+                Authorization: "miguel-pereira-guimaraes"
             }
         })
             .then(response => {
                 console.log(response.data)
-                alert("Usuário deletado com sucesso")
+                alert ("Usuário deletado com sucesso!")
                 this.getUserByld()
             })
             .catch(error => {
@@ -25,7 +25,7 @@ class Cadastro extends React.Component {
     componentDidMount() {
         axios.get("https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users", {
             headers: {
-                Authorization: "anderson-franciscato-guimaraes"
+                Authorization: "miguel-pereira-guimaraes"
             }
         })
             .then(response => {
@@ -37,10 +37,10 @@ class Cadastro extends React.Component {
                 alert ("Erro ao buscar usuários")
             })
     }
-mostrarUsuarios = () => {
+mostrarUsers = () => {
         axios.get('https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users', {
             headers: {
-                Authorization: "anderson-franciscato-guimaraes"
+                Authorization: "miguel-pereira-guimaraes"
             }
         })
         const usuarios = this.state.usuarios.map(usuario => {
@@ -48,7 +48,7 @@ mostrarUsuarios = () => {
                 <li key={usuario.id}>
                     {usuario.name}
                     {usuario.email}
-                    <button onClick={() => this.deletarUsuario(usuario.id)}>Deletar</button>
+                    <button onClick={() => this.deletUser(usuario.id)}>Deletar</button>
                 </li>
             )
         })
@@ -57,12 +57,12 @@ mostrarUsuarios = () => {
     render() {
         return (
             <div className="App">
-                <h1>Cadastro de Usuários</h1>
+                {/* <h1>Cadastro de Usuários</h1> */}
                 <ul>
-                    {this.mostrarUsuarios()}
+                    {this.mostrarUsers()}
                 </ul>
             </div>
         );
     }
 }
-export default Cadastro;
+export default User;
