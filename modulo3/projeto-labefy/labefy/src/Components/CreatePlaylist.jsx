@@ -1,7 +1,92 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import axios from "axios";
 import Playlists from "./Playlists";
 import styled from "styled-components";
+
+//Estilizações
+
+const ContainerGeral = styled.div`
+margin: 0 auto;
+display: flex;
+flex-direction: column;
+align-items: center;
+max-width: 100%;
+min-height: 100vh;
+margin: 20px;
+`
+
+const H2 = styled.h2`
+padding: 1rem;
+background: black;
+display: flex;
+flex-direction: column;
+font-weight: bold;
+font-size: 6vh;
+margin: 0 auto;
+background: -webkit-linear-gradient(#4B0082, white);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+letter-spacing: 1px;
+`
+const ContainerPlaylists = styled.div`
+font-size: 3vh;
+font-weigth: bold;
+background: -webkit-linear-gradient(whitesmoke, #4B0082);
+border-radius: 10px;
+padding: 5px;
+margin: 5px;
+cursor: default;
+box-shadow: 
+                0 0 5px white,
+  
+                0 0 5px #4B0082,
+  
+                0 0 5px #4B0082,
+  
+                0 0 5px white;
+
+
+`
+
+const Input = styled.input`
+display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: 2s;
+`
+
+const Buttons = styled.button`
+background: -webkit-linear-gradient(#4B0082, white);
+margin: 2px;
+
+:hover {
+
+  overflow: hidden;
+
+  transition: 0.2s;
+
+  letter-spacing: 0.5px;
+
+  background: -webkit-linear-gradient(#4B0082, white);
+  
+    color: white;
+  
+    border-radius: 5px;
+  
+    box-shadow: 0 0 10px white,
+  
+                0 0 10px #4B0082,
+  
+                0 0 10px white,
+  
+                0 0 10px #4B0082;
+  
+  }
+`
+
+
+
+//Código
 
 export const URL =
   "https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists";
@@ -12,115 +97,123 @@ export const headers = {
   },
 };
 
-function CreatePlaylist(props) {
-
-  const [name, setName] = useState("");
-  const [playlists, setPlaylists] = useState([]);
-  const [tracks, setTracks] = useState(false);
-  const [selectPlaylist, setSelectPlaylist] = useState("");
-
-  useEffect({
-    getPlaylist
-  },[])
-
-
-  function renderTracks(showPlaylist) {
-    setTracks( true );
-    setSelectPlaylist( showPlaylist );
-  };
-  // console.log(renderTracks)
-
-  function renderPage() {
-    setTracks( false );
+export default class CreatePlayList extends React.Component {
+  state = {
+    nome: "",
+    playlists: [],
+    tracks: false,
+    selectPlaylist: "",
   };
 
-  function createPlaylist() {
+  rendertracks = (mostraPlaylist) => {
+    this.setState({ tracks: true, selectPlaylist: mostraPlaylist });
+  };
+
+  renderPage = () => {
+    this.setState({ tracks: false });
+  };
+
+  componentDidMount() {
+    this.getPlaylist();
+  }
+
+  componentDidUpdate() {
+    this.getPlaylist();
+  }
+
+  createPlaylist = () => {
     const body = {
-      name: name,
+      name: this.state.nome,
     };
     axios
       .post(URL, body, headers)
       .then((res) => {
-        alert("playlist criada!");
-        setName( "" );
+        alert("Sua playlist foi criada!");
+        this.setState({ nome: "" });
       })
       .catch((err) => {
-        alert("Inválido, tente outro nome");
+        alert("Houve um erro, tente outro nome");
       });
   };
-//  console.log(createPlaylist)
-  function getNamePlaylist(e) {
-    setName( e.target.value );
+
+  getNomePlaylist = (e) => {
+    this.setState({ nome: e.target.value });
   };
 
-  function getPlaylist () {
+  getPlaylist = () => {
     axios
       .get(URL, headers)
       .then((res) => {
-        setPlaylists( res.data.result.list );
+        this.setState({ playlists: res.data.result.list });
       })
       .catch((err) => {
         console.log("erro!");
       });
   };
-  // console.log(getPlaylist)
-  function deletePlaylist(playlistId) {
 
+  deletePlaylist = (idPlaylist) => {
     axios
       .delete(
-        `https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${playlistId}`,
+        `https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${idPlaylist}`,
         headers
       )
       .then((res) => console.log(res))
       .catch((err) => console.log(err.response));
   };
-  // console.log(deletePlaylist)
-    if (tracks) {
+
+  render() {
+    if (this.state.tracks) {
       return (
         <Playlists
-          renderPage={renderPage}
-          selectPlaylist={selectPlaylist}
+          renderPage={this.renderPage}
+          selectPlaylist={this.state.selectPlaylist}
         />
       );
     }  
 
-    const playlistsRenderizadas = playlists.map((pl) => {
+    const playlistsRenderizadas = this.state.playlists.map((playlist) => {
       return (
         <div>
-          <div>
-          <div
-            key={pl.id}
-            onClick={renderTracks(pl)}>
-          {pl.name}
+          <divPlaylists>
+          <divPlaylists
+            key={playlist.id}
+            onClick={() => this.rendertracks(playlist)}>
+          {playlist.name}
           <br />
-          </div>
-          <button onClick={deletePlaylist(pl.id)}>deletar
-          </button>
+          </divPlaylists>
+          <Buttons 
+          onClick={() => this.deletePlaylist(playlist.id)}>deletar
+          </Buttons>
           <br />
-          </div>      
+          </divPlaylists>      
         </div>
       );
     });
 
     return (
-      <div>
-        <button onClick={props.goToLogin}>Retornar</button>
-        <h2>Deep Ocean</h2>
-        <input
+      <ContainerGeral>
+        <Buttons 
+        onClick={this.props.goToLogin}>Retornar
+        </Buttons>
+        <H2>Criar Playlist</H2>
+        <Input
           type="text"
           placeholder="Nome da Playlist"
-          value={name}
-          onChange={getNamePlaylist}
+          value={this.state.nome}
+          onChange={this.getNomePlaylist}
         />
         <br />
-        <button onClick={createPlaylist}>criar</button>
+        <Buttons
+         onClick={this.createPlaylist}>criar
+         </Buttons>
         <br />
         <br />
-        <h1>Minhas Playlists</h1>
-        {playlistsRenderizadas}
+        <H2>Minhas Playlists</H2>
+        <ContainerPlaylists>
+          {playlistsRenderizadas}
+        </ContainerPlaylists>
         <br />
-      </div>
+      </ContainerGeral>
     );
+  }
 }
-
-export default CreatePlaylist;

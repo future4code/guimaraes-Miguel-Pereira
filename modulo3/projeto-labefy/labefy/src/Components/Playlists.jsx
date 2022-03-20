@@ -2,122 +2,241 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import styled from "styled-components";
 
+const ContainerGeral = styled.div`
+margin: 0 auto;
+display: flex;
+flex-direction: column;
+align-items: center;
+max-width: 100%;
+min-height: 100vh;
+margin: 20px;
+`
+
+const H2 = styled.h2`
+padding: 1rem;
+background: black;
+display: flex;
+flex-direction: column;
+font-weight: bold;
+font-size: 6vh;
+margin: 0 auto;
+background: -webkit-linear-gradient(#4B0082, white);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+letter-spacing: 1px;
+`
+const H4 = styled.h4`
+padding: 1rem;
+background: black;
+display: flex;
+flex-direction: column;
+font-weight: bold;
+font-size: 4vh;
+margin: 0 auto;
+background: -webkit-linear-gradient(#4B0082, white);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+letter-spacing: 1px;
+`
+const P = styled.p`
+padding: 0.2rem;
+background: black;
+display: flex;
+flex-direction: column;
+font-weight: bold;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+`
+const Audio = styled.audio`
+margin: 5px;
+
+`
+const ContainerPlayer = styled.div`
+// font-size: 3vh;
+font-weigth: bold;
+border-radius: 5px;
+padding: 2px;
+margin: 2px;
+cursor: default;
+background: #F5F5F5;
+box-shadow: 
+                0 0 5px white,
+  
+                0 0 5px #4B0082,
+  
+                0 0 5px white,
+  
+                0 0 5px #4B0082;
+
+
+`
+
+const Input = styled.input`
+display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: 2s;
+`
+
+const Buttons = styled.button`
+background: -webkit-linear-gradient(#4B0082, white);
+margin: 2px;
+
+:hover {
+
+  overflow: hidden;
+
+  transition: 0.2s;
+
+  letter-spacing: 0.5px;
+
+  background: -webkit-linear-gradient(#4B0082, white);
+  
+    color: white;
+  
+    border-radius: 5px;
+  
+    box-shadow: 0 0 10px white,
+  
+                0 0 10px white,
+  
+                0 0 10px white,
+  
+                0 0 10px white;
+  
+  }
+`
+
 export const headers = {
   headers: {
     Authorization: "miguel-pereira-guimaraes",
   },
 };
 
-function Playlists(props) {
+export default class Playlists extends React.Component {
 
-  const [show, setShow] = useState([])
-  const [name, setName] = useState("")
-  const [artist, setArtist] = useState("")
-  const [music, setMusic] = useState("")
+  state = {
+    show: [],
+    name: "",
+    artist: "",
+    music: ""
+  }
 
-   useEffect({
-    getTracks
-  },[])
+  componentDidMount() {
+    this.getTracks();
+  }
+  componentDidUpdate() {
+    this.getTracks()
+  }
 
-  function nameMusic(e) {
-    setName( e.target.value );
-  };
-  function artistMusic(e) {
-    setArtist( e.target.value );
-  };
-  function urlMusic(e) {
-    setMusic( e.target.value );
-  };
-
-  function getTracks() {
+  getTracks = () => {
     axios
       .get(
-        `https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${props.selectPlaylist.id}/tracks`,
+        `https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${this.props.selectPlaylist.id}/tracks`,
         headers
       )
       .then((res) => {
-        setShow( res.data.result.tracks );
+        this.setState({ show: res.data.result.tracks });
       })
       .catch((err) => {});
   };
 
-  function addTrackToPlaylist() {
+  nameMusic = (e) => {
+    this.setState({ name: e.target.value });
+  };
+  artistMusic = (e) => {
+    this.setState({ artist: e.target.value });
+  };
+  urlMusic = (e) => {
+    this.setState({ music: e.target.value });
+  };
+
+  addTrackToPlaylist = () => {
     const body = {
-      name: name,
-      artist: artist,
-      url: music,
+      name: this.state.name,
+      artist: this.state.artist,
+      url: this.state.music,
     };
 
     axios
       .post(
-        `https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${props.selectPlaylist.id}/tracks`,
+        `https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${this.props.selectPlaylist.id}/tracks`,
         body,
         headers
       )
       .then((res) => {
-       setName( "" );
-       setArtist( "" );
-       setMusic( "" );
+       this.setState({ name: "" });
+       this.setState({ artist: "" });
+       this.setState({ music: "" });
       })
       .catch((err) => {
         console.log(err);
       });
   };
  
-  function removeTrackFromPlaylist(trackId) {
+  removeTrackFromPlaylist = (trackId) => {
 
     axios
       .delete(
-        `https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${props.selectPlaylist.id}/tracks/${trackId}`,
+        `https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${this.props.selectPlaylist.id}/tracks/${trackId}`,
         headers
       )
       .then((res) => console.log(res))
       .catch((err) => console.log(err.response));
   };
 
-    const trackRender = show.map((track) => {
+
+  render() {
+    const trackRender = this.state.show.map((track) => {
       return (
         <div>
-          <div key={track.id}>
-            <div><span>{track.artist}</span> - {track.name}</div>
-            <audio controls>
-            <source src={track.url} type={"audio/mp3"}/>
-            </audio>
-            <button onClick={removeTrackFromPlaylist(track.id)}>
+          <ContainerPlayer key={track.id}>
+            <div>
+            <P>Artista/Banda: {track.artist}</P>
+            <P>Musica: {track.name}</P>
+            </div>
+            <Audio controls>
+            <source src={track.url} type={"audio/mp4"}/>
+            </Audio>
+            <br/>
+            <Buttons onClick={() => {this.removeTrackFromPlaylist(track.id)}}>
             Excluir Música
-          </button>
-          </div>
+          </Buttons>
+          </ContainerPlayer>
         </div>
       );
     });
+
     return (
-      <div>
-        {/* <h1>Suas Playlists</h1> */}
-        <h3>{props.selectPlaylist.name}</h3>
-        <input
+      <ContainerGeral>
+        <H2>Suas Playlists</H2>
+        <H4>{this.props.selectPlaylist.name}</H4>
+        <Input
           type="text"
           placeholder="música"
-          value={name}
-          onChange={nameMusic}
+          value={this.state.name}
+          onChange={this.nameMusic}
         />
         <br />
-        <input
+        <Input
           type="text"
           placeholder="artista/banda"
-          value={artist}
-          onChange={artistMusic}
+          value={this.state.artist}
+          onChange={this.artistMusic}
         />
         <br />
 
-        <input
+        <Input
           type="text"
           placeholder="link"
-          value={music}
-          onChange={urlMusic}
+          value={this.state.music}
+          onChange={this.urlMusic}
         />
         <br />
 
-        <button onClick={addTrackToPlaylist}>Adicionar</button>
+        <Buttons onClick={this.addTrackToPlaylist}>
+          Adicionar
+        </Buttons>
         <br />
         <br />
 
@@ -125,12 +244,13 @@ function Playlists(props) {
         <br />
         <br />
 
-        <button onClick={props.renderPage}>Voltar</button>
+        <Buttons onClick={this.props.renderPage}>
+          Voltar
+        </Buttons>
         <br />
         <br />
 
-      </div>
-    );
+      </ContainerGeral>
+    )
+  }
 }
-
-export default Playlists;

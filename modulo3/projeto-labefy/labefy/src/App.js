@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import CreatePlaylist from "./Components/CreatePlaylist";
 import Login from "./Components/Login";
+import Playlists from "./Components/Playlists";
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -8,7 +9,7 @@ display: flex;
 justify-content: center;
 max-width: 100%;
 min-height: 100vh;
-// background: black;
+background: #1C1C1C;
 ` 
 
 
@@ -38,6 +39,7 @@ function App() {
     return(
     <>
     <Container>{switchScreen()}</Container>
+    {/* <CreatePlaylist /> */}
     </>
     )
 }

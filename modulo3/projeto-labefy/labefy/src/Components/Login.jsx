@@ -22,7 +22,7 @@ flex-direction: column;
 font-weight: bold;
 font-size: 6vh;
 margin: 0 auto;
-background: -webkit-linear-gradient(purple, white);
+background: -webkit-linear-gradient(#4B0082, white);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 letter-spacing: 5px;
@@ -36,13 +36,13 @@ flex-direction: column;
 font-weight: bold;
 font-size: 3vh;
 margin: 0 auto;
-background: -webkit-linear-gradient(purple, white);
+background: -webkit-linear-gradient(#4B0082, white);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 `
 
 const Button = styled.button`
-background: -webkit-linear-gradient(purple, white);
+background: -webkit-linear-gradient(#4B0082, white);
 letter-spacing: 0.5px;
 
 :hover {
@@ -55,7 +55,7 @@ letter-spacing: 0.5px;
 
   letter-spacing: 2px;
 
-  background: -webkit-linear-gradient(purple, white);
+  background: -webkit-linear-gradient(#4B0082, white);
   
     color: white;
   
