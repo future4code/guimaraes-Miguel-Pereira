@@ -4,16 +4,16 @@ import HomePage from './Components/HomePage';
 import PageMatchs from './Components/PageMatchs'
 
 
-function App() {
+function App(props) {
 
   const [screen, setScreen] = useState("HomePage")
   const selectScreen = () => {
     switch (screen) {
       case "HomePage":
-        return<HomePage selectHome={selectHome} />
+        return<HomePage selectMatchs={selectMatchs} />
 
       case "PageMatchs":
-        return<PageMatchs selecMatchs={selectMatchs} />
+        return<PageMatchs selectHome={selectHome} />
     }
   }
 
@@ -28,9 +28,7 @@ function App() {
 
   return (
     <div className="App">
-      {/* {selectScreen()} */}
-      <HomePage />
-      <PageMatchs />
+      {selectScreen()}
     </div>
   );
 }

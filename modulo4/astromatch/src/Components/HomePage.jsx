@@ -46,7 +46,6 @@ flex-direction: column;
 flex: 1 1 0%;
 -webkit-box-pack: end;
 justify-content: flex-end;
-
 `
 const ContainerFooter = styled.div`
 display: flex;
@@ -67,6 +66,7 @@ box-shadow: rgb(117 117 117 / 77%) 0px 2px 10px 0px;
     display: flex;
     -webkit-box-align: center;
     align-items: center;
+    
 `
 const ContainerImgUser = styled.div`
 box-shadow: rgb(117 117 117 / 77%) 0px 2px 10px 0px;
@@ -98,6 +98,15 @@ width: 100%;
     z-index: 1;
 `
 
+const Title = styled.h1`
+background: linear-gradient(to right, DarkRed , rebeccapurple, steelblue);
+background-clip: text;
+	-webkit-background-clip: text;
+color: transparent;
+padding:0;
+letter-spacing:1.5px;
+`
+
 const Infos = styled.p`
 margin: 5px;
 padding: 10px;
@@ -105,39 +114,80 @@ padding: 10px;
 
 const ButtonMatch = styled.img`
 width: 4vh;
-background-image: linear-gradient(to bottom, rebeccapurple, steelblue, turquoise);
-background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+
+  :hover {
+    transform: scale(0.8);
+    transition: all 0.2s ease 0s;
+  }
 `
 
 const ButtonRestart = styled.img`
 width: 4vh;
-background-image: linear-gradient(to bottom, rebeccapurple, steelblue, turquoise);
-background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+
+  :hover {
+    @keyframes loading {
+      0% {
+        transform: rotate(0);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    };
+    animation: loading 2s linear infinite;
+  }
 `
 
 const ButtonLike = styled.button`
 border-radius: 50%;
-border: 1px solid blue;
+border: 1px solid steelblue;
 font-size: 6vh;
 background-image: linear-gradient(to bottom, rebeccapurple, steelblue, turquoise);
 background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
+  :hover {
+    transform: scale(1.2);
+    transition: all 02.s ease 0; 
+    border: 1px solid DarkRed;
+    background-image: linear-gradient(to bottom, rebeccapurple, DarkRed, Crimson);
+background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  }
+
+  :active {
+    transform: scale(1);
+    transition: all 0.1s;
+
+  }
 `
 
 const ButtonDislike = styled.button`
 padding: 1px 7px;
 border-radius: 50%;
-border: 1px solid blue;
+border: 1px solid steelblue;
 font-size: 6vh;
 background-image: linear-gradient(to bottom, rebeccapurple, steelblue, turquoise);
 background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
+  :hover {
+    transform: scale(1.2);
+    transition: all 0.2s ease 0; 
+    border: 1px solid DarkRed;
+    background-image: linear-gradient(to bottom, rebeccapurple, DarkRed, Crimson);
+background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  }
+
+  :active {
+    transform: scale(1);
+    transition: all 0.1s;
+
+  }
 `
 
 function HomePage( props ) {
@@ -151,11 +201,6 @@ function HomePage( props ) {
     const URL = `https://us-central1-missao-newton.cloudfunctions.net/astroMatch/miguel-pereira`
 
       const [user, setUser] = useState([]);
-      const [screen, setScreen] = useState("HomePage");
-      const [like, setLike] = useState(false);
-      const [deslike, setDeslike] = useState(false);
-      const [clear, setClear] = useState(false)
-      const [matchs, setMatchs] = useState(false)
 
       useEffect(() => {
         getProfile();
@@ -168,7 +213,7 @@ function HomePage( props ) {
                 `${URL}/person`,
               )
               .then((res) => {
-                console.log( res.data.profile );
+                // console.log( res.data.profile );
                 setUser( res.data.profile );
               })
               .catch((err) => {
@@ -177,19 +222,22 @@ function HomePage( props ) {
           };
 
     const clearMatchs = () => {
-      axios
-        .put(
-          `${URL}/clear`,
-          `${URL}/person`
-        )
-        .then((res) => {
-          alert('Seus matchs foram limpos!');
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-    }
+      if(window.confirm('Deseja limpar seus Matchs?')){
+          axios
+          .put(
+            `${URL}/clear`
+          )
+          .then((res) => {
+            alert('Seus matchs foram limpos!');
+            setUser([]);
+            getProfile();
+            console.log(res)
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+        }
+      }
 
     const buttonLike = () => {
 
@@ -203,7 +251,7 @@ function HomePage( props ) {
              )
              .then((res) => {
                getProfile();
-                 console.log(res);
+                //  console.log(res);
 
              })
              .catch((err) => {
@@ -224,7 +272,7 @@ function HomePage( props ) {
                  )
                  .then((res) => {
                    getProfile();
-                   console.log(res);
+                  //  console.log(res);
     
                  })
                  .catch((err) => {
@@ -237,8 +285,8 @@ function HomePage( props ) {
       <ContainerGeral>
         <ContainerHeader>
           <ButtonRestart src={atualizar} onClick={clearMatchs}/>
-          <h1>AstroMatch</h1>
-          <ButtonMatch src={match}/>
+          <Title>AstroMatch</Title>
+          <ButtonMatch src={match} alt='erro' onClick={props.selectMatchs}/>
         </ContainerHeader>
         <ContainerBody>
           <ContainerUser>
