@@ -87,6 +87,14 @@ class Post extends React.Component {
   }
 
   render() {
+
+    // let curtiu
+
+    // if(this.state.curtido) {
+    //   numeroCurtidas = aoCurtir
+    // } else {
+    // }
+
     let iconeCurtida
 
     if(this.state.curtido) {

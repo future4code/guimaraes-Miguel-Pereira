@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import styled from 'styled-components'
+import {useState} from 'react'
 
 const CommentContainer = styled.div`
     display: flex;
@@ -20,8 +21,8 @@ export class SecaoComentario extends Component {
 	onChangeComentario() {
 
 	}
-
 	render() {
+		
 		return <CommentContainer>
 			<InputComentario
 				placeholder={'Comentário'}
@@ -30,5 +31,6 @@ export class SecaoComentario extends Component {
 			/>
 			<button onClick={this.props.aoEnviar}>Enviar</button>
 		</CommentContainer>
+
 	}
 }
