@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import styled from 'styled-components'
 import atualizar from '../Assets/atualizar.png'
-import match from '../Assets/match.png'
 import sair from '../Assets/sair.png'
 
 const All = styled.div`
@@ -95,6 +94,7 @@ display:block;
   :hover {
     transform: scale(0.8);
     transition: all 0.2s ease 0s;
+    filter: opacity(0.4) drop-shadow(0 0 0 darkblue);
   }
 `
 
@@ -102,6 +102,7 @@ const ButtonRestart = styled.img`
 width: 4vh;
 
   :hover {
+    filter: opacity(0.4) drop-shadow(0 0 0 darkblue);
     @keyframes loading {
       0% {
         transform: rotate(0);
@@ -131,11 +132,10 @@ function PageMatchs( props ) {
             `${URL}/person`,
         )
         .then((res) => {
-            console.log( res.data.profile );
             setUser( res.data.profile );
         })
         .catch((err) => {
-            console.log(err);
+            alert(err);
         });
     };
 
@@ -146,10 +146,9 @@ function PageMatchs( props ) {
             )
             .then((res) => {
                 setMatchs(res.data.matches)
-                console.log(res.data.matches)
             })
             .catch((err) => {
-                console.log(err)
+                alert(err)
             })
     }
 
@@ -164,10 +163,9 @@ function PageMatchs( props ) {
               setUser([]);
               getMatchs([])
               getProfile();
-              console.log(res)
             })
             .catch((err) => {
-              console.log(err);
+              alert(err);
             })
           }
         }

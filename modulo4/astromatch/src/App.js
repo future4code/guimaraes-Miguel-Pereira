@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios'; 
 import HomePage from './Components/HomePage';
 import PageMatchs from './Components/PageMatchs'
 

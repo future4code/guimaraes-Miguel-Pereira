@@ -3,7 +3,6 @@ import axios from 'axios';
 import styled from 'styled-components';
 import atualizar from '../Assets/atualizar.png'
 import match from '../Assets/match.png'
-import sair from '../Assets/sair.png'
 
 
 const All = styled.div`
@@ -118,6 +117,7 @@ width: 4vh;
   :hover {
     transform: scale(0.8);
     transition: all 0.2s ease 0s;
+    filter: opacity(0.4) drop-shadow(0 0 0 DarkBlue	);
   }
 `
 
@@ -125,6 +125,7 @@ const ButtonRestart = styled.img`
 width: 4vh;
 
   :hover {
+    filter: opacity(0.4) drop-shadow(0 0 0 DarkBlue	);
     @keyframes loading {
       0% {
         transform: rotate(0);
@@ -192,12 +193,6 @@ background-clip: text;
 
 function HomePage( props ) {
 
-    const headers = {
-        headers: {
-          Authorization: "miguel-pereira-guimaraes",
-        },
-      };
-
     const URL = `https://us-central1-missao-newton.cloudfunctions.net/astroMatch/miguel-pereira`
 
       const [user, setUser] = useState([]);
@@ -213,11 +208,10 @@ function HomePage( props ) {
                 `${URL}/person`,
               )
               .then((res) => {
-                // console.log( res.data.profile );
                 setUser( res.data.profile );
               })
               .catch((err) => {
-                  console.log(err);
+                  alert(err);
               });
           };
 
@@ -231,10 +225,9 @@ function HomePage( props ) {
             alert('Seus matchs foram limpos!');
             setUser([]);
             getProfile();
-            console.log(res)
           })
           .catch((err) => {
-            console.log(err);
+            alert(err);
           })
         }
       }
@@ -251,11 +244,10 @@ function HomePage( props ) {
              )
              .then((res) => {
                getProfile();
-                //  console.log(res);
 
              })
              .catch((err) => {
-                 console.log(err);
+                 alert(err);
              })
         };
 
@@ -272,11 +264,10 @@ function HomePage( props ) {
                  )
                  .then((res) => {
                    getProfile();
-                  //  console.log(res);
     
                  })
                  .catch((err) => {
-                     console.log(err);
+                     alert(err);
                  })
             };
 
