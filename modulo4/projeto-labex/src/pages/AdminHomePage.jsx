@@ -10,3 +10,5 @@ const AdminHomePage = () => {
         </div>
     )
 }
+
+export default AdminHomePage;

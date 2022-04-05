@@ -1,4 +1,4 @@
-
+import React from "react";
 
 const CreateTripPage = () => {
     return(
@@ -9,3 +9,5 @@ const CreateTripPage = () => {
         </div>
     )
 }
+
+export default CreateTripPage;

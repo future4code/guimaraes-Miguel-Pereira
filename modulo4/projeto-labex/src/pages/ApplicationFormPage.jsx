@@ -1,4 +1,4 @@
-
+import React from "react";
 
 
 const ApplicationFormPage = () => {
@@ -8,3 +8,5 @@ const ApplicationFormPage = () => {
         </div>
     )
 }
+
+export default ApplicationFormPage;
