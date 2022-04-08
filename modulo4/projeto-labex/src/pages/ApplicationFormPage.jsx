@@ -21,26 +21,13 @@ const Nav = styled.div `
 const AplicationFormPage = () => {
 
   const navigate = useNavigate()
-  const [trips, setTrips] = useState()
+  const [form, setForm] = useState()
 
    const goToListTrips = () => {
      navigate("/trips/list")
    }
 
-   useEffect(() => {
-    getLists()
-    }, [])
 
-
-   const getLists = () =>{
-    axios
-        .get('https://us-central1-labenu-apis.cloudfunctions.net/labeX/miguel-pereira-guimaraes/trips')
-        .then((res) => {
-            // console.log(res.data.trips)
-            setTrips(res.data.trips)})
-        
-        .catch(err => console.log(err))
-}
 
     return (
 <div>

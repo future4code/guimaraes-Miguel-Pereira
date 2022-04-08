@@ -40,7 +40,7 @@ const ListTripPage = () => {
 
         <div>
             <h1>Pagina de Viagens</h1>
-            <button onClick={() => {goToHomePage(navigate)}}>Inicio</button>
+            <button onClick={() => {goToHomePage(navigate)}}>Home</button>
             {renderTrips}
 
         </div>
