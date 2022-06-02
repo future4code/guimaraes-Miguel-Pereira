@@ -1,4 +1,3 @@
-//1.
 import cors from "cors";
 import express, {Request, Response} from "express";
 import { AddressInfo } from "net";
@@ -63,3 +62,5 @@ app.get("/posts/:id", (req: Request, res: Response) => {
     res.status(400).send("Post não encontrado ou inexistente")
   }
 })
+
+//Eexercício 9
