@@ -1,0 +1,36 @@
+GET http://localhost:3003/users
+Content-Type: application/json
+
+###
+
+POST http://localhost:3003/user/create
+Content-Type: application/json
+
+{
+    "name": "Miguel T." ,
+    "email": "miguel@miguel.com",
+    "type": "admin",
+    "age": 24
+}
+
+###
+
+GET http://localhost:3003/users/type?type=normal
+
+###
+
+GET http://localhost:3003/users/name?name=miguel t.
+
+###
+
+PUT http://localhost:3003/user/update/2
+
+{
+    "name": "Miguel"
+}
+
+###
+
+DELETE http://localhost:3003/user/delete/6
+
+###
