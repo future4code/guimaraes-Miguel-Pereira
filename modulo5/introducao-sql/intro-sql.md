@@ -181,3 +181,28 @@ VALUES(
 "2014/09/02",
 7
 );
+
+SELECT * FROM Films;
+
+#Exercício 7
+#A)
+SELECT id, title, rating FROM Films WHERE id = 2;
+#B)
+SELECT * FROM Films WHERE title = "O candidato honesto";
+#C)
+SELECT id, title, synopsis FROM Films WHERE rating >= 7;
+
+#Exercício 8
+#A)
+SELECT * FROM Films WHERE title LIKE "%vida%";
+SELECT * FROM Films WHERE synopsis LIKE "%vida%";#teste
+#B)
+SELECT * FROM Films WHERE synopsis LIKE "%morte%";#teste
+SELECT * FROM Films WHERE synopsis LIKE "%politico corrupto%";#teste
+SELECT * FROM Films WHERE synopsis LIKE "%avo%";#teste
+SELECT * FROM Films WHERE synopsis LIKE "%vida%" OR title LIKE "%vida%";
+#C)
+SELECT * FROM Films WHERE release_date <= "2015/06/15";#Teste
+SELECT * FROM Films WHERE release_date <= "2022/06/15";
+#D)
+SELECT * FROM Films WHERE release_date <= "2022/06/15" AND ( synopsis LIKE "%vida%" OR title LIKE "%vida%" ) AND rating > 7;
