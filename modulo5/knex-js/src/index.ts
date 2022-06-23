@@ -72,35 +72,35 @@ app.get('/actor/name', async(req: Request, res: Response) => {
 // } )
 //Exercício 2 Endpoints por Query Builders.
 //A)
-//Update Salary
-app.put('/actor/:id', async( req: Request, res: Response) => {
-    try {
-        const result = await connection("Actor")
-        .update({
-            salary: req.body.salary
-        })
-        .where({ id: req.params.id })
+// Update Salary
+// app.put('/actor/:id', async( req: Request, res: Response) => {
+//     try {
+//         const result = await connection("Actor")
+//         .update({
+//             salary: req.body.salary
+//         })
+//         .where({ id: req.params.id })
 
-        res.send(result);
-    } catch (error: any) {
-        console.log(error.message);
-        res.status(500).send("Erro inesperado.")
-    }
-})
+//         res.send(result);
+//     } catch (error: any) {
+//         console.log(error.message);
+//         res.status(500).send("Erro inesperado.")
+//     }
+// })
 //B)
 //Delete Actor
-app.delete('/actor/:id', async (req: Request, res: Response) => {
-    try {
-       await connection("Actor")
-       .delete()
-       .where({ id: req.params.id })
+// app.delete('/actor/:id', async (req: Request, res: Response) => {
+//     try {
+//        await connection("Actor")
+//        .delete()
+//        .where({ id: req.params.id })
 
-       res.send("Ator deletado.")
-    } catch (error: any) {
-        console.log(error.message);
-        res.status(500).send("Erro inesperado.")
-    }
-})
+//        res.send("Ator deletado.")
+//     } catch (error: any) {
+//         console.log(error.message);
+//         res.status(500).send("Erro inesperado.")
+//     }
+// })
 //C)
 //Get Average Salary
 app.get('/actor/avg',async (req: Request, res: Response) => {
@@ -133,7 +133,6 @@ app.get("/actor/id/:id", async (req: Request, res: Response) => {
 // Get Quantity ByGender
 app.get('/actor/gender', async( req: Request, res: Response) => {
     try {
-        console.log(req.query)
         const result = await connection("Actor")
         .count('* as count')
         .where({ gender : req.query.gender })
@@ -150,17 +149,44 @@ app.post('/actor', async (req: Request, res: Response) => {
         const result = await connection("Actor")
         .insert(
             {
-            'id': req.body.id,
-            'name': req.body.name,
-            'birth_date': new Date(req.body.birthDate),
-            'salary': req.body.salary,
-            'gender': req.body.gender
+            id: Math.round(Math.random() * (51 - 1 ) + 1),
+            name: req.body.name,
+            birth_date: new Date(req.body.birthDate),
+            salary: req.body.salary,
+            gender: req.body.gender
             })
 
-            res.send(result);
+            res.status(201).send("Ator / Atriz adicionado(a).");
     } catch (error: any ) {
         console.log(error.message);
         res.status(500).send("Erro inesperado.")
     }
 })
 //A)
+app.put('/actor', async (req: Request, res: Response) => {  
+    try {
+        await connection("Actor")
+        .update({
+            salary: req.body.salary
+        })
+        .where({
+            id: req.body.id
+        })
+        res.send("Salario atualizado!")
+    } catch (error: any) {
+        console.log(error.message);
+        res.status(500).send("Erro inesperado.")
+    }
+})
+//B
+app.delete('/actor/:id',async (req: Request, res: Response) => {
+    try {
+        await connection("Actor")
+            .delete()
+            .where({id: req.params.id})
+            res.status(200).send("Ator/Atriz deletado(a).")
+    } catch (error: any ) {
+        console.log(error.message);
+        res.status(500).send("Erro inesperado.")
+    }
+})
