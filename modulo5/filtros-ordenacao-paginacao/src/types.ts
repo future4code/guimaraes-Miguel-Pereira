@@ -4,7 +4,7 @@ export enum USER_TYPE  {
    CX = 'CX'
 }
 
-export type user = {
+export type userInfos = {
    id: string
    name: string
    email: string

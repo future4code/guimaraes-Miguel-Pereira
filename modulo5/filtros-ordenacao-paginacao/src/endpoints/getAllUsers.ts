@@ -10,7 +10,7 @@ async function selectAllUsers():Promise<any> {
    return result[0]
 }
 
-export const getAllUsers = async(req: Request,res: Response): Promise<void> =>{
+export default async(req: Request,res: Response): Promise<void> =>{
    try {
       const users = await selectAllUsers()
 
