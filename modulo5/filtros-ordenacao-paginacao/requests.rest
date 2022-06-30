@@ -1,0 +1,18 @@
+//getAllUsers
+GET http://localhost:3003/users
+###
+//getUserByName
+GET http://localhost:3003/user/name?name=nathalia
+###
+//getUserByType
+GET http://localhost:3003/user/cx
+###
+//getSortedUser
+GET http://localhost:3003/user/sort?filter=id&order=desc
+###
+//getPageUser
+GET http://localhost:3003/user/page?size=5&page=3
+###
+//getAllEndpoints
+GET http://localhost:3003/users?page=3&size=5&filter=id&order=asc
+###
