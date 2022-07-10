@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
 import { connection } from "../data/connection";
-import { Purchase, User } from "../data/types";
+import { Purchase } from "../data/types";
 
 
 const getUserPurchases = async (req: Request, res: Response): Promise<void> => {
     let errorCode = 400
     try {
         const user_id = req.params.user_id as string;
+        
 
         const purchasesByUser: Purchase[] = await connection("labecommerce_purchases")
         .select('id', 'quantity', 'total_price')

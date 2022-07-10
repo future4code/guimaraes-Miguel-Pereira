@@ -6,8 +6,15 @@ import { User } from "../data/types";
 const getAllUsers = async (req: Request, res: Response) => {
     let errorCode = 400
     try {
-        const users: User[] = await connection("labecommerce_users")
+        const users = await connection("labecommerce_users")
         .select()
+        // .innerJoin(
+        //     "labecommerce_purchases",
+        //     function () {
+        //       this
+        //       .on("labecommerce_purchases.user_id", "=", "labecommerce_users.id")
+        //     }
+        //   )
 
         if(!users.length){
             errorCode = 404;
