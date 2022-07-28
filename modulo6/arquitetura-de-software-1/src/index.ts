@@ -1,9 +1,10 @@
 import {app} from "./app"
+import {UserController} from './controller/UserController'
 
+const userController = new UserController();
 
+app.post("/createUser", userController.createUSer);
 
-app.get("/", async function(){
-   console.log("endpoint teste")
-})
+app.get("/all", userController.getAllUser);
 
-
+app.delete("/:id", )

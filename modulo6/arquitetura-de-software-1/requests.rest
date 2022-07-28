@@ -1,0 +1,14 @@
+POST http://localhost:3003/createUser
+Content-Type: application/json 
+
+{
+"name":"Miguel Tocchetto",
+"email":"miguel@mail.com",
+"password":"textunique"
+}
+
+###
+GET http://localhost:3003/all
+
+###
+DELETE http://localhost:3003/56efca10-dee3-4a02-a466-5fd8a3888a20
