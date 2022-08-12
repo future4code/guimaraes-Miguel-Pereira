@@ -1,5 +1,6 @@
 import { UserDatabase } from "../data/UserDatabase"
 import { v4 as generateId } from 'uuid'
+import { User } from "../types/User"
 
 export class UserBusiness {
   async create({ email, name, password }: any):Promise<void> {
@@ -16,6 +17,11 @@ export class UserBusiness {
       email,
       password
     })
+  }
+
+  async getAllUsers(): Promise<User[]> {
+    const userDB = new UserDatabase();
+    return await userDB.getUser();
   }
 
 }
