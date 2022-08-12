@@ -1,6 +1,6 @@
 import { BaseDatabase } from "./BaseDatabase";
 import { POST_TYPES } from "../types/PostType";
-
+import {post} from "../types/PostType"
 export class PostDataBase extends BaseDatabase {
     private postTable = 'labook_posts'
 
@@ -25,5 +25,24 @@ export class PostDataBase extends BaseDatabase {
         } catch (error: any) {
             throw new Error(error.sqlMessage || error.message);
         }
+    };
+
+    getPost = async (
+        id: string
+    ): Promise<post[]> => {
+        try {
+            const post: post[] = []
+            const result = await PostDataBase.connection(this.postTable)
+            .select('*')
+            .where({id})
+
+            for(let i of result){
+                post.push(i)
+            }
+            return post;
+        } catch (error: any) {
+            throw new Error(error.sqlMessage || error.message);
+        }
+        
     }
 }

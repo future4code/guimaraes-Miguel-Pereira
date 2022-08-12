@@ -26,5 +26,16 @@ export class PostController extends PostBusiness {
         } catch (error: any) {
             res.send(error.sqlMessage || error.message);
         }
+    };
+
+    GetPost = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const {id} = req.params
+            const post  = await this.getPostById(id)
+
+            res.status(200).send(post)
+        } catch (error: any) {
+            res.send(error.sqlMessage || error.message);
+        }
     }
 }

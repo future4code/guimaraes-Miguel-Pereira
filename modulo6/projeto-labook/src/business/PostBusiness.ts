@@ -26,5 +26,15 @@ export class PostBusiness {
         } catch (error: any) {
             throw new Error(error.sqlMessage || error.message);
         }
+    };
+
+    getPostById = async(id: string): Promise<post[]> => {
+        try {
+            const post = await this.getPostById(id)
+
+            return(post)
+        } catch (error: any) {
+            throw new Error(error.sqlMessage || error.message);
+        }
     }
 }
