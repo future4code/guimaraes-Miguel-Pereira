@@ -109,5 +109,6 @@ SELECT * FROM Films
 INNER JOIN Rating ON Films.id = Rating.movie_id;
 #A) Esse operador indica que estamos pegando as avaliações a partir do id dos filmes.
 #B)
-SELECT movie_id, title, rate FROM Films 
+SELECT * FROM Films 
 INNER JOIN Rating ON Films.id = Rating.movie_id;
+SELECT * FROM Films;
