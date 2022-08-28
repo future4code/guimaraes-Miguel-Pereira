@@ -1,6 +1,6 @@
 import { MovieDatabase } from "../data/MovieDatabase"
 import { GenerateId } from "../services/generateId"
-import { MovieDTO } from "../types/movieDTO"
+import { MovieDTO } from "../model/movieDTO"
 
 
 export class MovieBusiness {

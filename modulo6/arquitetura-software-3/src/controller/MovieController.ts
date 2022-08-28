@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { MovieBusiness } from "../business/MovieBusiness";
-import { MovieDTO } from "../types/movieDTO";
+import { MovieDTO } from "../model/movieDTO";
 
 
 export class MovieController {

@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
 import { UserBusiness } from "../business/UserBusiness";
-import { UserDTO } from "../types/userDTO";
+import { UserDTO } from "../model/userDTO";
+import { CustomError } from "../error/customError";
 
 export class UserController {
   //Create User
-  async create(req: Request, res: Response): Promise<void> {
+  public create = async (req: Request, res: Response): Promise<void> => {
     try {
       const { email, name, password } = req.body;
 
@@ -17,9 +18,9 @@ export class UserController {
       const userBusiness = new UserBusiness();
       await userBusiness.create(input);
 
-      res.status(201).send({ message: "Usuário cadastrado com sucesso" });
+      res.status(201).send({ message: "Usuário cadastrado com sucesso!" });
     } catch (error: any) {
-      res.status(400).send(error.message);
+      res.status(error.statusCode || 400).send(error.message);
     }
   };
   //Get All Users
@@ -29,7 +30,7 @@ export class UserController {
 
       res.status(200).send(users)
     } catch (error: any) {
-      res.status(400).send(error.message);
+      res.status(error.statusCode || 400).send(error.message);
     }
   }
 }

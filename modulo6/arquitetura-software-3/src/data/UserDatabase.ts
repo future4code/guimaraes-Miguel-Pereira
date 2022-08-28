@@ -1,24 +1,32 @@
 import { BaseDatabase } from "./BaseDatabase";
-import { User } from "../types/user";
+import { User } from "../model/user";
 
 export class UserDatabase extends BaseDatabase {
-  protected static TABLE_NAME = "LABEFLIX_USER";
+  private TABLE_NAME = "LABEFLIX_USER";
+
   //Create User
-  async create({ id, name, email, password }: any): Promise<void> {
-    await UserDatabase.connection
+  public create = async ({ id, name, email, password }: any): Promise<void> => {
+    try {
+      await UserDatabase.connection(this.TABLE_NAME)
       .insert({
         id,
         name,
         email,
         password,
-      })
-      .into(UserDatabase.TABLE_NAME);
+      });
+    } catch (error: any) {
+      throw new Error(error.sqlMessage);
+    }
   };
 //Get All Users
   async getUser(): Promise<User[]> {
-    const result = await UserDatabase.connection(UserDatabase.TABLE_NAME)
+    try {
+      const result = await UserDatabase.connection(this.TABLE_NAME)
     .select('*')
 
     return result
+    } catch (error: any) {
+      throw new Error(error.sqlMessage);
+    }
   };
 }
