@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { UserBusiness } from "../business/UserBusiness";
+import { UserDTO } from "../types/userDTO";
 
 export class UserController {
   //Create User
@@ -7,7 +8,7 @@ export class UserController {
     try {
       const { email, name, password } = req.body;
 
-      const input = {
+      const input: UserDTO = {
         name,
         email,
         password

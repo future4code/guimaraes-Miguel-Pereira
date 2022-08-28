@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { MovieBusiness } from "../business/MovieBusiness";
+import { MovieDTO } from "../types/movieDTO";
 
 
 export class MovieController {
@@ -8,7 +9,7 @@ export class MovieController {
     try {
       const { title, description, duration_in_minutes, year_of_release } = req.body;
 
-      const input = {
+      const input: MovieDTO = {
         title,
         description,
         duration_in_minutes,

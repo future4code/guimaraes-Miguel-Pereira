@@ -1,10 +1,11 @@
 import { MovieDatabase } from "../data/MovieDatabase"
-import { v4 as generateId } from 'uuid'
+import { GenerateId } from "../services/generateId"
+import { MovieDTO } from "../types/movieDTO"
 
 
 export class MovieBusiness {
     //Create Movie
-    async create(input: any): Promise<void> {
+    async create(input: MovieDTO): Promise<void> {
         const {
             title,
             description,
@@ -15,7 +16,7 @@ export class MovieBusiness {
             throw new Error("Dados inválidos")
         }
 
-        const id = generateId()
+        const id = GenerateId()
 
         const movieDatabase = new MovieDatabase()
         await movieDatabase.create({

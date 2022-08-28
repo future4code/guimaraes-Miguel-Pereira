@@ -2,7 +2,7 @@ import { BaseDatabase } from "./BaseDatabase";
 import { User } from "../types/user";
 
 export class UserDatabase extends BaseDatabase {
-  private static TABLE_NAME = "LABEFLIX_USER";
+  protected static TABLE_NAME = "LABEFLIX_USER";
   //Create User
   async create({ id, name, email, password }: any): Promise<void> {
     await UserDatabase.connection
