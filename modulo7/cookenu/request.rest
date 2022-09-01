@@ -2,7 +2,17 @@ POST http://localhost:3003/users/signup
 Content-Type: application/json
 
 {
-"name": "Mil",
-"email": "admin@admin.com",
-"password": "admin"
+"name": "Gabriele",
+"email": "gaby@admin.com",
+"password": "admin2"
+}
+
+###
+
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "gaby@admin.com",
+    "password": "admin"
 }

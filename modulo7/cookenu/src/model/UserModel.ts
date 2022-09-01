@@ -13,6 +13,6 @@ export interface UserInputDTO {
 
 export type UserLogin = {
     email: string,
-    senha: string
+    password: string
 };
 

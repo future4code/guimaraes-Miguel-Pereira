@@ -1,6 +1,6 @@
 import { UserBusiness } from "../business/UserBusiness";
 import { Request, Response } from "express";
-import { UserInputDTO } from "../model/UserModel";
+import { UserInputDTO, UserLogin } from "../model/UserModel";
 
 export class UserController {
 
@@ -19,6 +19,24 @@ export class UserController {
             res.status(201).send({message: "Cadastrado com sucesso!", token})
         } catch (error: any) {
             res.status(400).send(error.message || error.sqlMessage);
+        }
+    };
+
+    public login = async(req: Request, res: Response) => {
+        try {
+            const { email, password } = req.body;
+
+            const input: UserLogin = {
+                email,
+                password
+            };
+
+            const userBusiness = new UserBusiness();
+            const token = await userBusiness.login(input);
+
+            res.status(200).send({token})
+        } catch (error: any) {
+            res.status(400).send(error.message);
         }
     }
 }
