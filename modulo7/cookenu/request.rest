@@ -27,3 +27,8 @@ authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkNmJmMzAzLTMyY2ItN
 GET http://localhost:3003/users/70461123-b93a-4377-8eee-42f58d5fbb17
 authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkNmJmMzAzLTMyY2ItNDllMi1hNzVjLWFmNDQwYTE0YjMzMyIsImlhdCI6MTY2MjE1NTk3MCwiZXhwIjoxNjYyMTU5NTcwfQ.d283NsIJ1YjWuy8yEfRNfyrfrbkG-_FqVQh04KqH3go
 
+###
+
+GET http://localhost:3003/users
+
+###

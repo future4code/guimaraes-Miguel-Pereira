@@ -12,3 +12,5 @@ userRouter.post("/login", userController.login)
 userRouter.get("/profile", userController.getCurrentProfile)
 //Get Profile By Id
 userRouter.get("/:id", userController.getProfileById)
+//Get All Users
+userRouter.get("/", userController.getAllUsers)

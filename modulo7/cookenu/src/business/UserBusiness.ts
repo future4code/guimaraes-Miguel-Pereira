@@ -122,5 +122,17 @@ export class UserBusiness {
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message)
         }
-    }
+    };
+
+    getAllUsers = async () => {
+        const users = await this.userDB.getAllUsers()
+
+        if(users.length <0 ){
+            throw new UserNotFound();
+        }
+
+        return users
+    };
+
+    
 }

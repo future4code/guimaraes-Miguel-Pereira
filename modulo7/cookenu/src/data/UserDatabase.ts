@@ -58,5 +58,17 @@ export class UserDatabase extends BaseDatabase {
         }
     };
 
-    
+    getAllUsers = async () => {
+        try {
+            const result = await UserDatabase.connection(this.USER_TABLE)
+            .select()
+            .orderBy("name")
+
+            return result
+        } catch (error: any) {
+            throw new CustomError(400, error.message)
+        }
+    }
+
+
 }
