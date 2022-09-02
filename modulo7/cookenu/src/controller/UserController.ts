@@ -4,6 +4,10 @@ import { UserInputDTO, UserLogin } from "../model/UserModel";
 
 export class UserController {
 
+    private userBusiness: UserBusiness
+    constructor(){
+        this.userBusiness = new UserBusiness
+    } 
     public signup = async(req: Request, res: Response ): Promise<void> => {
         try {
             let { email, name, password} = req.body
@@ -38,5 +42,29 @@ export class UserController {
         } catch (error: any) {
             res.status(400).send(error.message);
         }
+    };
+
+    public getCurrentProfile = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const token = req.headers.authorization as string
+        const result = await this.userBusiness.getCurrentProfile(token)
+
+        res.status(200).send(result)
+    } catch (error: any) {
+        res.status(400).send(error.message);
     }
+    };
+
+    public getProfileById = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const token = req.headers.authorization as string
+            const id = req.params.id as string
+            const input = {id, token}
+            const result = await this.userBusiness.getProfileById(input)
+    
+            res.status(200).send(result)
+        } catch (error: any) {
+            res.status(400).send(error.message);
+        }
+        };
 }

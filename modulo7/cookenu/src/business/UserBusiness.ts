@@ -17,6 +17,11 @@ const authenticator = new Authenticator()
 
 export class UserBusiness {
 
+    private userDB: UserDatabase
+    constructor(){
+        this.userDB = new UserDatabase();
+    }
+    
     public signup = async (input: UserInputDTO): Promise<string> => {
         try {
             
@@ -40,9 +45,9 @@ export class UserBusiness {
                 email,
                 password
             }
-            const userDatabase = new UserDatabase()
-            await userDatabase.create(user);
 
+            await this.userDB.create(user)
+    
             const token = authenticator.generateToken({ id })
             return token
         } catch (error: any) {
@@ -61,8 +66,7 @@ export class UserBusiness {
                 throw new InvalidEmail();
             };
 
-            const userDatabase = new UserDatabase();
-            const user = await userDatabase.findUserByEmail(email);
+            const user = await this.userDB.findUserByEmail(email);
 
             if(!user){
                 throw new InvalidEmail();
@@ -70,14 +74,51 @@ export class UserBusiness {
             if(user.password !== password){
                 throw new InvalidPassword();
             };
-            // if(user.email !== email){
-                
-            // };
-
 
             const id = user.id
             const token = authenticator.generateToken({ id })
+           
             return token
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message)
+        }
+    };
+
+    public getCurrentProfile = async (input: any): Promise<any> => {
+        try {
+            const tokenData = authenticator.getTokenData(input)
+            const user = await this.userDB.getProfileById(tokenData.id)
+
+            if(!user){
+                throw new UserNotFound();
+            }
+
+            return user
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message)
+        }
+    };
+
+    public getProfileById = async (input: any): Promise<any> => {
+        try {
+            const {id, token} = input
+
+            const profile = await this.userDB.getProfileById(id)
+            const tokenData = authenticator.getTokenData(token)
+            const userExists = await this.userDB.findUserById(input.id)
+            const profileExists = await this.userDB.getProfileById(tokenData.id)
+
+            if(!profileExists){
+                throw new UserNotFound();
+            }
+            if(!userExists){
+                throw new UserNotFound();
+            }
+            if(!profile){
+                throw new UserNotFound();
+            }
+
+            return profile
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message)
         }
