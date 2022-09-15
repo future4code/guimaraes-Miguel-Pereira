@@ -15,15 +15,15 @@ export class UserDatabase extends BaseDatabase {
         }
     };
 
-    public getUserByEmail = async (email: string): Promise<{}> => {
+    public getUserByEmail = async (email: string): Promise<User> => {
         try {
             const result = await UserDatabase.connection(this.TABLE_NAME)
-            .select()
+            .select("email")
             .where({email})
 
             return result[0]
         } catch (error: any) {
             throw new Error(error.message || error.sqlMessage);
         }
-    }
+    };
 };
