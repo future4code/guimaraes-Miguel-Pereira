@@ -1,4 +1,6 @@
+import { UserRole } from "./User";
+
 export type AuthenticationData = {
     id: string,
-    role: string
+    role: UserRole | undefined
 };
