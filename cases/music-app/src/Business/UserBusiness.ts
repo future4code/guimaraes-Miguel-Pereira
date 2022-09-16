@@ -6,6 +6,7 @@ import { LoginInputDTO, User, UserInputDTO, UserRole } from "../Models/User";
 import { CustomError } from "../Errors/CustomError";
 import { EmailAlreadExistis, EmptyParams, InvalidEmailDetail, ShortName } from "../Errors/SignupErrors";
 import { InvalidLogin, InvalidEmail, InvalidPassword } from "../Errors/LoginErrors";
+import { AuthenticationData } from "../Models/AuthenticationData";
 
 const idGenerator = new IdGenerator();
 const authenticator = new Authenticator();
@@ -72,23 +73,19 @@ export class UserBusiness {
                 throw new InvalidLogin();
             };
 
-            if(!email.includes("@")){
-                throw new InvalidEmail();
-            };
-
             const user = await this.userDB.getUserByEmail(email)
-            
+            const hashCompare = await hashPassword.compareHash(password, user.password)
+
             if(!user){
                 throw new InvalidEmail();
             };
 
-            if(!user.password){
+            if(!hashCompare){
                 throw new InvalidPassword();  
             };
 
-            const id = user.id
-            const role = user.role
-            const token = authenticator.generateToken({id, role})
+            const payload: AuthenticationData = {id: user.id, role: user.role}
+            const token = authenticator.generateToken(payload)
             
             return token;
         } catch (error: any) {
