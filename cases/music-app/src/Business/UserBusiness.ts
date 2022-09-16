@@ -4,7 +4,8 @@ import IdGenerator from "../Services/GeneratorId";
 import { UserDatabase } from "../Database/UserDatabase";
 import { LoginInputDTO, User, UserInputDTO, UserRole } from "../Models/User";
 import { CustomError } from "../Errors/CustomError";
-import { EmptyParams, InvalidEmail, ShortName } from "../Errors/SignupErrors";
+import { EmailAlreadExistis, EmptyParams, InvalidEmailDetail, ShortName } from "../Errors/SignupErrors";
+import { InvalidLogin, InvalidEmail, InvalidPassword } from "../Errors/LoginErrors";
 
 const idGenerator = new IdGenerator();
 const authenticator = new Authenticator();
@@ -23,24 +24,24 @@ export class UserBusiness {
             const hash = await hashPassword.generateHash(password);
             const verifyEmail = await this.userDB.getUserByEmail(email)
 
-            if(verifyEmail){
-                throw new Error("Email já cadastrado")
+            if(!name || !email || !password){
+                throw new EmptyParams();
             };
 
-            if(role !== "ADMIN" && role !== "USER"){
-                role = UserRole.USER
+            if(verifyEmail){
+                throw new EmailAlreadExistis()
             };
 
             if(!email.includes("@")){
-                throw new InvalidEmail();
+                throw new InvalidEmailDetail();
             };
 
             if(name.length < 4){
                 throw new ShortName();
             };
 
-            if(!name || !email || !password){
-                throw new EmptyParams();
+            if(role !== "ADMIN" && role !== "USER"){
+                role = UserRole.USER
             };
 
             const user: User = {
@@ -67,8 +68,29 @@ export class UserBusiness {
         try {
             const {email, password} = input;
 
-            const tt = ""
-            return tt
+            if(!email || !password){
+                throw new InvalidLogin();
+            };
+
+            if(!email.includes("@")){
+                throw new InvalidEmail();
+            };
+
+            const user = await this.userDB.getUserByEmail(email)
+            
+            if(!user){
+                throw new InvalidEmail();
+            };
+
+            if(!user.password){
+                throw new InvalidPassword();  
+            };
+
+            const id = user.id
+            const role = user.role
+            const token = authenticator.generateToken({id, role})
+            
+            return token;
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message);
         }
