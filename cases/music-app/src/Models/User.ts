@@ -23,3 +23,10 @@ export interface LoginInputDTO {
     password: string
 };
 
+export interface EditUserInputDTO {
+    id:string,
+    name: string,
+    email: string,
+    password: string,
+    role: UserRole
+};

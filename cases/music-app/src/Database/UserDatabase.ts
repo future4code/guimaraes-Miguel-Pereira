@@ -1,6 +1,6 @@
 import { BaseDatabase } from "./BaseDatabase";
-import { User, UserRole } from "../Models/User";
-import { CustomError } from "../Errors/CustomError";
+import { EditUserInputDTO, User, UserRole } from "../Models/User";
+import { AuthenticationData } from "../Models/AuthenticationData"
 
 export class UserDatabase extends BaseDatabase {
     private TABLE_NAME: string = "Music_User";
@@ -20,10 +20,30 @@ export class UserDatabase extends BaseDatabase {
             const result = await UserDatabase.connection(this.TABLE_NAME)
             .select()
             .where({email})
-            console.log(result)
+        
             return result[0]
         } catch (error: any) {
             throw new Error(error.message || error.sqlMessage);
         }
     };
+
+    public editUser = async (input: EditUserInputDTO, token: AuthenticationData): Promise<{}> => {
+        try {
+          const result = await UserDatabase.connection(this.TABLE_NAME)
+          .update({
+            name: input.name,
+            email: input.email,
+            password: input.password,
+            role: input.role
+          })  
+          .where("role", "like", "ADMIN")
+          .andWhere("role","like", token.role as string )
+          console.log(result)
+          return result
+          
+
+        } catch (error: any) {
+            throw new Error(error.message || error.sqlMessage);
+        }
+    }
 };

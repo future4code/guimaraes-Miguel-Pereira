@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { UserBusiness } from "../Business/UserBusiness";
-import { UserInputDTO, LoginInputDTO } from "../Models/User";
+import { UserInputDTO, LoginInputDTO, EditUserInputDTO } from "../Models/User";
 import { CustomError } from "../Errors/CustomError";
 
 export class UserController {
@@ -38,6 +38,22 @@ export class UserController {
             const token = await this.userBusiness.login(input);
 
             res.status(200).send({token})
+        } catch (error: any) {
+            res.status(400).send(error.message);
+        }
+    };
+
+    editUser = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const { name, email, password, role} = req.body
+            const { id } = req.params
+            const token = req.headers.authorization as string
+
+            const input = {name, email, password, role, id}
+
+            await this.userBusiness.editUser(input, token)
+
+            res.sendStatus(200).send("Dado(s) alterado(s).")
         } catch (error: any) {
             res.status(400).send(error.message);
         }
