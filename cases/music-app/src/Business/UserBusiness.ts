@@ -95,22 +95,30 @@ export class UserBusiness {
 
     editUser = async (input: EditUserInputDTO, token: string): Promise<any> => {
       try {
-        const {name, email, password, role} = input;
-        const tokenData = authenticator.getTokenData(token)
-        // const userExists = await this.userDB.getUserByEmail(email)
-
-        // if(!userExists){
-        //     throw new Error("Usuário não encontrado.");
-        // };
+        let {id, name, email, password, role} = input;
+        // const hash = await hashPassword.generateHash(password as string);
+        const tokenData = await authenticator.getTokenData(token)
+     
         if(tokenData.role !== UserRole.ADMIN){
             throw new Error("Acesso não autorizado.");
         };
-        if(!email?.includes("@")){
-            throw new InvalidEmailDetail();
-        };
-        if(name?.length < 4){
-            throw new ShortName();  
-        };
+
+        // const isEmail = email?.includes("@")
+        // console.log(isEmail)
+        // if(!isEmail){
+        //     throw new InvalidEmailDetail();
+        // };
+        // if(name.length < 4){
+        //     throw new ShortName();  
+        // };
+
+        // const edit = {
+        //     id: id,
+        //     name: name,
+        //     email: email,
+        //     password: password,
+        //     role: role,
+        // }
 
         const result = await this.userDB.editUser(input, tokenData)
         return result;

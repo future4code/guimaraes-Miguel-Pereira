@@ -36,9 +36,9 @@ export class UserDatabase extends BaseDatabase {
             password: input.password,
             role: input.role
           })  
-          .where("role", "like", "ADMIN")
-          .andWhere("role","like", token.role as string )
-          console.log(result)
+          .where({id: input.id})
+        //   .andWhere("role","like", token.role as string)
+        //   console.log(result)
           return result
           
 
