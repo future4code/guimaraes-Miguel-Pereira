@@ -4,8 +4,8 @@ import IdGenerator from "../Services/GeneratorId";
 import { UserDatabase } from "../Database/UserDatabase";
 import { EditUserInputDTO, LoginInputDTO, User, UserInputDTO, UserRole } from "../Models/User";
 import { CustomError } from "../Errors/CustomError";
-import { EmailAlreadExistis, EmptyParams, InvalidEmailDetail, ShortName } from "../Errors/SignupErrors";
-import { InvalidLogin, InvalidEmail, InvalidPassword } from "../Errors/LoginErrors";
+import { EmailAlreadExistis, EmptyParams, InvalidAuthorization, InvalidEmailFeature, ShortName, UserNotFound } from "../Errors/UserErrors";
+import { InvalidLogin, InvalidEmail, InvalidPassword } from "../Errors/UserErrors";
 import { AuthenticationData } from "../Models/AuthenticationData";
 
 const idGenerator = new IdGenerator();
@@ -14,34 +14,31 @@ const hashPassword = new HashPassword();
 
 export class UserBusiness {
     private userDB: UserDatabase
-    constructor(){
+    constructor() {
         this.userDB = new UserDatabase();
     };
 
+    //( Acesso público )
     signup = async (input: UserInputDTO): Promise<string> => {
         try {
-            let {name, email, password, role} = input;
+            let { name, email, password, role } = input;
             const id: string = idGenerator.generateId();
             const hash = await hashPassword.generateHash(password);
             const verifyEmail = await this.userDB.getUserByEmail(email)
 
-            if(!name || !email || !password){
+            if (!name || !email || !password) {
                 throw new EmptyParams();
             };
-
-            if(verifyEmail){
+            if (verifyEmail) {
                 throw new EmailAlreadExistis()
             };
-
-            if(!email.includes("@")){
-                throw new InvalidEmailDetail();
+            if (!email.includes("@")) {
+                throw new InvalidEmailFeature();
             };
-
-            if(name.length < 4){
+            if (name.length < 4) {
                 throw new ShortName();
             };
-
-            if(role !== "ADMIN" && role !== "USER"){
+            if (role !== "ADMIN" && role !== "USER") {
                 role = UserRole.USER
             };
 
@@ -53,11 +50,11 @@ export class UserBusiness {
                 role
             };
 
-            
+
 
             await this.userDB.insertUser(user);
 
-            const token = authenticator.generateToken({id, role});
+            const token = authenticator.generateToken({ id, role });
 
             return token;
         } catch (error: any) {
@@ -65,65 +62,100 @@ export class UserBusiness {
         }
     };
 
+    //( Acesso público )
     login = async (input: LoginInputDTO): Promise<string> => {
         try {
-            const {email, password} = input;
+            const { email, password } = input;
 
-            if(!email || !password){
+            if (!email || !password) {
                 throw new InvalidLogin();
             };
 
             const user = await this.userDB.getUserByEmail(email)
             const hashCompare = await hashPassword.compareHash(password, user.password)
 
-            if(!user){
+            if (!user) {
                 throw new InvalidEmail();
             };
-
-            if(!hashCompare){
-                throw new InvalidPassword();  
+            if (!hashCompare) {
+                throw new InvalidPassword();
             };
 
-            const payload: AuthenticationData = {id: user.id, role: user.role}
+            const payload: AuthenticationData = { id: user.id, role: user.role }
             const token = authenticator.generateToken(payload)
-            
+
             return token;
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message);
         }
     };
 
-    editUser = async (input: EditUserInputDTO, token: string): Promise<any> => {
-      try {
-        let {id, name, email, password, role} = input;
-        // const hash = await hashPassword.generateHash(password as string);
+    //(Acesso de ADMIN)
+    getAllUsers = async (token: string) :Promise<any> => {
+       try {
         const tokenData = await authenticator.getTokenData(token)
-     
-        if(tokenData.role !== UserRole.ADMIN){
-            throw new Error("Acesso não autorizado.");
+
+        if ( tokenData.role !== UserRole.ADMIN){
+            throw new InvalidAuthorization();
         };
 
-        // const isEmail = email?.includes("@")
-        // console.log(isEmail)
-        // if(!isEmail){
-        //     throw new InvalidEmailDetail();
-        // };
-        // if(name.length < 4){
-        //     throw new ShortName();  
-        // };
-
-        // const edit = {
-        //     id: id,
-        //     name: name,
-        //     email: email,
-        //     password: password,
-        //     role: role,
-        // }
-
-        const result = await this.userDB.editUser(input, tokenData)
-        return result;
-      } catch (error: any) {
+        const result = await this.userDB.getAllUsers()
+        return result
+       } catch (error: any) {
         throw new CustomError(error.statusCode, error.message);
-      }  
+       }
+    };
+    
+    //(Acesso de ADMIN)
+    editUser = async (input: EditUserInputDTO, token: string): Promise<void> => {
+        try {
+            let { id, name, email, password, role } = input;
+            // const hash = await hashPassword.generateHash(password as string);
+            const tokenData = await authenticator.getTokenData(token)
+
+            if (tokenData.role !== UserRole.ADMIN) {
+                throw new InvalidAuthorization();
+            };
+            // const isEmail = email?.includes("@")
+            // console.log(isEmail)
+            // if(!isEmail){
+            //     throw new InvalidEmailDetail();
+            // };
+            // if(name.length < 4){
+            //     throw new ShortName();  
+            // };
+
+            // const edit = {
+            //     id: id,
+            //     name: name,
+            //     email: email,
+            //     password: hash,
+            //     role: role,
+            // }
+
+            await this.userDB.editUser(input)
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message);
+        }
+    };
+
+    //(Acesso de ADMIN)
+    deleteUser = async (input: string, token: string): Promise<void> => {
+        try {
+            const tokenData = await authenticator.getTokenData(token)
+            const id = await this.userDB.getUserById(input)
+            //Como verificar se um id não existe no banco de dados
+            if (tokenData.role !== UserRole.ADMIN) {
+                throw new InvalidAuthorization();
+            };
+            if(!id){
+                throw new UserNotFound();
+            };
+
+            await this.userDB.deleteUser(input)
+
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message);
+        }
     };
 }

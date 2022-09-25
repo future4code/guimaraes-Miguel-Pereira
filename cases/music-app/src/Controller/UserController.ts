@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import { UserBusiness } from "../Business/UserBusiness";
-import { UserInputDTO, LoginInputDTO, EditUserInputDTO } from "../Models/User";
-import { CustomError } from "../Errors/CustomError";
-import { AuthenticationData } from "../Models/AuthenticationData";
+import { UserInputDTO, LoginInputDTO } from "../Models/User";
+
 
 export class UserController {
     private userBusiness: UserBusiness
@@ -44,6 +43,18 @@ export class UserController {
         }
     };
 
+    getAllUsers = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const token = req.headers.authorization as string
+
+            const result = await this.userBusiness.getAllUsers(token)
+
+            res.status(200).send(result)
+        } catch (error: any) {
+            res.status(400).send(error.message);
+        }
+    };
+
     editUser = async (req: Request, res: Response): Promise<void> => {
         try {
             const { name, email, password, role} = req.body
@@ -58,5 +69,18 @@ export class UserController {
         } catch (error: any) {
             res.status(400).send(error.message);
         }
+    };
+
+    deleteUser = async (req: Request, res: Response): Promise<void> => {
+try {
+    const {id} = req.params
+    const token = req.headers.authorization as string
+
+    await this.userBusiness.deleteUser(id, token)
+
+    res.status(200).send("Usuário deletado.")
+} catch (error: any) {
+    res.status(400).send(error.message);
+}
     };
 }

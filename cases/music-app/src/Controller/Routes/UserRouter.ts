@@ -8,11 +8,9 @@ const userController = new UserController();
 userRouter.post("/signup", userController.signup)
 //Login
 userRouter.post("/login", userController.login)
+//Get All Users
+userRouter.get("/", userController.getAllUsers)
 //Edit User
 userRouter.put("/edit/:id", userController.editUser)
-//Get Current Profile
-// userRouter.get("/profile", userController.getCurrentProfile)
-// //Get Profile By Id
-// userRouter.get("/:id", userController.getProfileById)
-// //Get All Users
-// userRouter.get("/", userController.getAllUsers)
+//Delete User
+userRouter.delete("/delete/:id", userController.deleteUser)
