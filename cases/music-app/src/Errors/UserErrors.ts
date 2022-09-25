@@ -33,7 +33,7 @@ export class InvalidEmailFeature extends CustomError {
 
 export class EmptyParams extends CustomError {
     constructor(){
-        super(401, "Os campos (name, email, password) são obrigatórios.")
+        super(401, "Algum campo obrigatório está vazio.")
     }
 };
 

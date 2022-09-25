@@ -5,28 +5,28 @@ import { UserInputDTO, LoginInputDTO } from "../Models/User";
 
 export class UserController {
     private userBusiness: UserBusiness
-    constructor(){
+    constructor() {
         this.userBusiness = new UserBusiness();
     };
 
-    public signup = async(req: Request, res: Response): Promise<void> => {
+    public signup = async (req: Request, res: Response): Promise<void> => {
         try {
             const input: UserInputDTO = {
-                email: req.body.email, 
-                name: req.body.name, 
-                password: req.body.password, 
+                email: req.body.email,
+                name: req.body.name,
+                password: req.body.password,
                 role: req.body.role?.toUpperCase()
             };
 
             const token = await this.userBusiness.signup(input);
 
-            res.status(200).send({message: "Usuário cadastrado!", token});
-        } catch (error: any ) {
+            res.status(201).send({ message: "Usuário cadastrado!", token });
+        } catch (error: any) {
             res.status(400).send(error.message);
         }
     };
 
-    login = async (req: Request, res: Response): Promise<void> => {
+    public login = async (req: Request, res: Response): Promise<void> => {
         try {
             const { email, password } = req.body;
 
@@ -37,13 +37,31 @@ export class UserController {
 
             const token = await this.userBusiness.login(input);
 
-            res.status(200).send({token})
+            res.status(200).send({ token })
         } catch (error: any) {
             res.status(400).send(error.message);
         }
     };
 
-    getAllUsers = async (req: Request, res: Response): Promise<void> => {
+    public createUser = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const token = req.headers.authorization as string
+            const input: UserInputDTO = {
+                email: req.body.email,
+                name: req.body.name,
+                password: req.body.password,
+                role: req.body.role?.toUpperCase()
+            };
+            
+            await this.userBusiness.createUser(input, token)
+
+            res.status(201).send("Usuário criado.")
+        } catch (error: any) {
+            res.status(400).send(error.message);
+        }
+    };
+
+    public getAllUsers = async (req: Request, res: Response): Promise<void> => {
         try {
             const token = req.headers.authorization as string
 
@@ -55,13 +73,13 @@ export class UserController {
         }
     };
 
-    editUser = async (req: Request, res: Response): Promise<void> => {
+    public editUser = async (req: Request, res: Response): Promise<void> => {
         try {
-            const { name, email, password, role} = req.body
+            const { name, email, password, role } = req.body
             const { id } = req.params
-            const  token  = req.headers.authorization as string
+            const token = req.headers.authorization as string
 
-            const input = {name, email, password, role, id}
+            const input = { name, email, password, role, id }
 
             await this.userBusiness.editUser(input, token)
 
@@ -71,16 +89,16 @@ export class UserController {
         }
     };
 
-    deleteUser = async (req: Request, res: Response): Promise<void> => {
-try {
-    const {id} = req.params
-    const token = req.headers.authorization as string
+    public deleteUser = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const { id } = req.params
+            const token = req.headers.authorization as string
 
-    await this.userBusiness.deleteUser(id, token)
+            await this.userBusiness.deleteUser(id, token)
 
-    res.status(200).send("Usuário deletado.")
-} catch (error: any) {
-    res.status(400).send(error.message);
-}
+            res.status(200).send("Usuário deletado.")
+        } catch (error: any) {
+            res.status(400).send(error.message);
+        }
     };
 }

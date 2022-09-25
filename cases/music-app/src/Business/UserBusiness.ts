@@ -50,8 +50,6 @@ export class UserBusiness {
                 role
             };
 
-
-
             await this.userDB.insertUser(user);
 
             const token = authenticator.generateToken({ id, role });
@@ -105,7 +103,45 @@ export class UserBusiness {
         throw new CustomError(error.statusCode, error.message);
        }
     };
-    
+    //(Acesso de ADMIN)
+    createUser = async (input: UserInputDTO, token: string ): Promise<void> => {
+        try {
+            let { name, email, password, role } = input;
+            const tokenData = await authenticator.getTokenData(token)
+            const id: string = idGenerator.generateId();
+            const hash = await hashPassword.generateHash(password);
+            const verifyEmail = await this.userDB.getUserByEmail(email)
+
+            if ( tokenData.role !== UserRole.ADMIN){
+                throw new InvalidAuthorization();
+            };
+            if (!name || !email || !password || !role) {
+                throw new EmptyParams();
+            };
+            if (verifyEmail) {
+                throw new EmailAlreadExistis()
+            };
+            if (!email.includes("@")) {
+                throw new InvalidEmailFeature();
+            };
+            if (name.length < 4) {
+                throw new ShortName();
+            };
+
+            const user: User = {
+                id,
+                name,
+                email,
+                password: hash,
+                role
+            };
+
+            await this.userDB.insertUser(user);
+
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message);
+        }
+    }
     //(Acesso de ADMIN)
     editUser = async (input: EditUserInputDTO, token: string): Promise<void> => {
         try {

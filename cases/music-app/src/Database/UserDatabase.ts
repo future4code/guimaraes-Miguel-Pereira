@@ -32,7 +32,7 @@ export class UserDatabase extends BaseDatabase {
             throw new Error(error.message || error.sqlMessage);
         }
     };
-    
+
     //Pega todos os usuários do banco de dados
     public getAllUsers = async (): Promise<any> => {
         try {

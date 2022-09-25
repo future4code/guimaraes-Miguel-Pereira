@@ -8,6 +8,8 @@ const userController = new UserController();
 userRouter.post("/signup", userController.signup)
 //Login
 userRouter.post("/login", userController.login)
+//Create User
+userRouter.post("/create", userController.createUser)
 //Get All Users
 userRouter.get("/", userController.getAllUsers)
 //Edit User

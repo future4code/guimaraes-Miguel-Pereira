@@ -1,3 +1,5 @@
+
+//Endpoints de Usuário
 ### Cadastro
 POST http://localhost:3003/users/signup
 Content-Type: application/json
@@ -17,11 +19,23 @@ Content-Type: application/json
     "password": "admin"
 }
 
-### Pegar Todos Os Usuários
+### Criar Usuário (ADMIN)
+POST http://localhost:3003/users/create
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMtNDRjMS1iOWU3LWFhOWZiZjFlNjUwZCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDA2ODAyMywiZXhwIjoxNjY0MDg2MDIzfQ.hTQ_pycNBjM5Iwri7q7mm2KM4QKQSHbWwc0pM9rG7Fw
+Content-Type: application/json
+
+{
+    "name": "teste",
+    "email": "teste@teste.com",
+    "password": "123",
+    "role": "admin"
+}
+
+### Pegar Todos Os Usuários (ADMIN)
 GET http://localhost:3003/users
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMtNDRjMS1iOWU3LWFhOWZiZjFlNjUwZCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDA2ODAyMywiZXhwIjoxNjY0MDg2MDIzfQ.hTQ_pycNBjM5Iwri7q7mm2KM4QKQSHbWwc0pM9rG7Fw
 
-### Editar Usuário
+### Editar Usuário (ADMIN)
 PUT  http://localhost:3003/users/edit/04b1e5ea-350e-493c-b0be-847df68cc3db
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMtNDRjMS1iOWU3LWFhOWZiZjFlNjUwZCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2MzcxODE2NiwiZXhwIjoxNjYzNzM2MTY2fQ.kBWOFZc-EXQPIuQBXFntK7xkgZN_5XoGSiq39k_ibh8
 Content-Type: application/json
@@ -30,6 +44,11 @@ Content-Type: application/json
 "name": "name"
 }
 
-### Deletar Usuário
+### Deletar Usuário (ADMIN)
 DELETE http://localhost:3003/users/delete/a0f358-eb5f-4f70-874d-7ce7034a1c85
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMtNDRjMS1iOWU3LWFhOWZiZjFlNjUwZCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDA2ODAyMywiZXhwIjoxNjY0MDg2MDIzfQ.hTQ_pycNBjM5Iwri7q7mm2KM4QKQSHbWwc0pM9rG7Fw
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//Endpoints de Playlist
+###
