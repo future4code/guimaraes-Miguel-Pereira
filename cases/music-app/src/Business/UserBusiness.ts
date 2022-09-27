@@ -137,7 +137,6 @@ export class UserBusiness {
             };
 
             await this.userDB.insertUser(user);
-
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message);
         }

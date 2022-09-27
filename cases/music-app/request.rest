@@ -15,8 +15,8 @@ POST http://localhost:3003/users/login
 Content-Type: application/json
 
 {
-    "email": "miguel@miguel.com",
-    "password": "admin"
+    "email": "teste@teste.com",
+    "password": "123"
 }
 
 ### Criar Usuário (ADMIN)
@@ -48,7 +48,22 @@ Content-Type: application/json
 DELETE http://localhost:3003/users/delete/a0f358-eb5f-4f70-874d-7ce7034a1c85
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMtNDRjMS1iOWU3LWFhOWZiZjFlNjUwZCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDA2ODAyMywiZXhwIjoxNjY0MDg2MDIzfQ.hTQ_pycNBjM5Iwri7q7mm2KM4QKQSHbWwc0pM9rG7Fw
 
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
 //Endpoints de Playlist
+### Criar Playlist
+POST http://localhost:3003/playlists/create/c24fb0af-7b79-4863-9877-17e7a099d7b7
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImMyNGZiMGFmLTdiNzktNDg2My05ODc3LTE3ZTdhMDk5ZDdiNyIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDIzNjUyMiwiZXhwIjoxNjY0MjU0NTIyfQ.GYSW_A8WGmooqrChJtWUOGx0OokFH2TAA0rgsRnnwfM
+Content-Type: application/json
+
+{
+    "name": "Reaggezera",
+    "genre": "Reagge",
+    "musics": "Lado de cá"
+}
+
 ###
