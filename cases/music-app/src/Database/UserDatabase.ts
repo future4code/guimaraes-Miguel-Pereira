@@ -1,6 +1,5 @@
 import { BaseDatabase } from "./BaseDatabase";
 import { EditUserInputDTO, User } from "../Models/User";
-import { AuthenticationData } from "../Models/AuthenticationData"
 
 export class UserDatabase extends BaseDatabase {
     private TABLE_NAME: string = "Music_User";
@@ -28,6 +27,18 @@ export class UserDatabase extends BaseDatabase {
                 .where({ email })
 
             return result[0]
+        } catch (error: any) {
+            throw new Error(error.message || error.sqlMessage);
+        }
+    };
+
+    //Pegar usuário por algum parâmetro
+    //( Consulta ao banco )
+    public getUserByParam = async (param: string): Promise<void> => {
+        try {
+            const result = await UserDatabase.connection(this.TABLE_NAME)
+            .select()
+            .where({param})
         } catch (error: any) {
             throw new Error(error.message || error.sqlMessage);
         }

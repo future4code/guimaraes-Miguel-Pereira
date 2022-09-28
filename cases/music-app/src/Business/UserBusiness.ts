@@ -145,28 +145,36 @@ export class UserBusiness {
     editUser = async (input: EditUserInputDTO, token: string): Promise<void> => {
         try {
             let { id, name, email, password, role } = input;
-            // const hash = await hashPassword.generateHash(password as string);
-            const tokenData = await authenticator.getTokenData(token)
-
+            const tokenData = await authenticator.getTokenData(token);
+            const editUser = await this.userDB.getUserById(id);
+            
             if (tokenData.role !== UserRole.ADMIN) {
                 throw new InvalidAuthorization();
             };
-            // const isEmail = email?.includes("@")
-            // console.log(isEmail)
-            // if(!isEmail){
-            //     throw new InvalidEmailDetail();
-            // };
-            // if(name.length < 4){
-            //     throw new ShortName();  
-            // };
+            if(email){
+                if(!email.includes("@")){
+                    throw new InvalidEmailFeature();
+                }
+            };
 
-            // const edit = {
-            //     id: id,
-            //     name: name,
-            //     email: email,
-            //     password: hash,
-            //     role: role,
-            // }
+            if(name){
+                if(name.length < 4){
+                    throw new ShortName();
+                }
+            };
+            ///Não está salvando a senha com hash no banco de dados
+            if(password){
+                const hash = await hashPassword.generateHash(input.password)
+                const edit = {
+                    id: id,
+                    name: editUser.name,
+                    email: editUser.email,
+                    password: hash,
+                    role: editUser.role
+                }
+
+                await this.userDB.editUser(edit)
+            };
 
             await this.userDB.editUser(input)
         } catch (error: any) {
