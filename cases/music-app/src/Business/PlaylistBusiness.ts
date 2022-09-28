@@ -15,7 +15,7 @@ export class PlaylistBusiness {
         this.playlistDB = new PlaylistDatabase();
     };
 
-    //Criar Playlist
+    //Criar Playlist de um usuário
     public createPlaylist = async (input: PlaylistInputDTO, token: string): Promise<void> => {
         try {
             let {name, genre, musics, user_id} = input;
@@ -39,6 +39,24 @@ export class PlaylistBusiness {
             };
 
             await this.playlistDB.createPlaylist(playlist);
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message);
+        }
+    };
+
+    //Pegar todas as playlists de um usuário
+    public getAllPlaylists = async (userId: string, token: string): Promise<any> => {
+        try {
+            const tokenData = await authenticator.getTokenData(token);
+            // const verifyPlaylist = await this.playlistDB.getPlaylistById(userId)
+
+        if(userId !== tokenData.id){
+            throw new InvalidAuthorization();
+            };
+
+        const result = await this.playlistDB.getAllPlaylists(userId)
+        return result
+
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message);
         }

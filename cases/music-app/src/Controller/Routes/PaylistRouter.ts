@@ -7,3 +7,5 @@ const playlistController = new PlaylistController();
 
 //Create Playlist
 playlistRouter.post("/create/:user_id", playlistController.createPaylist);
+//Get All Playlists
+playlistRouter.get("/:userId", playlistController.getAllPlaylists);

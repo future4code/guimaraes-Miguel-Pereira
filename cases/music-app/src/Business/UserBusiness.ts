@@ -89,7 +89,7 @@ export class UserBusiness {
     };
 
     //(Acesso de ADMIN)
-    getAllUsers = async (token: string) :Promise<any> => {
+    getAllUsers = async (token: string) :Promise<void> => {
        try {
         const tokenData = await authenticator.getTokenData(token)
 

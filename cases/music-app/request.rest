@@ -15,8 +15,8 @@ POST http://localhost:3003/users/login
 Content-Type: application/json
 
 {
-    "email": "miguel@miguel.com",
-    "password": "admin"
+    "email": "teste@teste.com",
+    "password": "123"
 }
 
 ### Criar Usuário (ADMIN)
@@ -33,7 +33,7 @@ Content-Type: application/json
 
 ### Pegar Todos Os Usuários (ADMIN)
 GET http://localhost:3003/users
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMtNDRjMS1iOWU3LWFhOWZiZjFlNjUwZCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDA2ODAyMywiZXhwIjoxNjY0MDg2MDIzfQ.hTQ_pycNBjM5Iwri7q7mm2KM4QKQSHbWwc0pM9rG7Fw
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMtNDRjMS1iOWU3LWFhOWZiZjFlNjUwZCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDM1ODUzNywiZXhwIjoxNjY0Mzc2NTM3fQ.M_KAsT2k5mlVN9ONT4BqpSx45v00Qd0nVstJY7N0t08
 
 ### Editar Usuário (ADMIN)
 PUT  http://localhost:3003/users/edit/04b1e5ea-350e-493c-b0be-847df68cc3db
@@ -56,8 +56,8 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMt
 
 //Endpoints de Playlist
 ### Criar Playlist
-POST http://localhost:3003/playlists/create/c24fb0af-7b79-4863-9877-17e7a099d7b7
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImMyNGZiMGFmLTdiNzktNDg2My05ODc3LTE3ZTdhMDk5ZDdiNyIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDIzNjUyMiwiZXhwIjoxNjY0MjU0NTIyfQ.GYSW_A8WGmooqrChJtWUOGx0OokFH2TAA0rgsRnnwfM
+POST http://localhost:3003/playlists/create/af3476ed-3543-44c1-b9e7-aa9fbf1e650d
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMtNDRjMS1iOWU3LWFhOWZiZjFlNjUwZCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDM1ODUzNywiZXhwIjoxNjY0Mzc2NTM3fQ.M_KAsT2k5mlVN9ONT4BqpSx45v00Qd0nVstJY7N0t08
 Content-Type: application/json
 
 {
@@ -66,4 +66,6 @@ Content-Type: application/json
     "musics": "Lado de cá"
 }
 
-###
+### Pegar Todas Playlists
+GET http://localhost:3003/playlists/af3476ed-3543-44c1-b9e7-aa9fbf1e650d
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMtNDRjMS1iOWU3LWFhOWZiZjFlNjUwZCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDM1ODUzNywiZXhwIjoxNjY0Mzc2NTM3fQ.M_KAsT2k5mlVN9ONT4BqpSx45v00Qd0nVstJY7N0t08
