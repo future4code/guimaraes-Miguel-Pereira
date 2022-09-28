@@ -151,9 +151,13 @@ export class UserBusiness {
             let { id, name, email, password, role } = input;
             const tokenData = await authenticator.getTokenData(token);
             const editUser = await this.userDB.getUserById(id);
+            // const hash = await hashPassword?.generateHash(password)
             
             if (tokenData.role !== UserRole.ADMIN) {
                 throw new InvalidAuthorization();
+            };
+            if(!editUser){
+                throw new UserNotFound();
             };
             if(email){
                 if(!email.includes("@")){
@@ -168,16 +172,8 @@ export class UserBusiness {
             };
             ///Não está salvando a senha com hash no banco de dados
             if(password){
-                const hash = await hashPassword.generateHash(input.password)
-                const edit = {
-                    id: id,
-                    name: editUser.name,
-                    email: editUser.email,
-                    password: hash,
-                    role: editUser.role
-                }
-
-                await this.userDB.editUser(edit)
+                let hash = await hashPassword.generateHash(password)
+                password === hash
             };
 
             await this.userDB.editUser(input)
