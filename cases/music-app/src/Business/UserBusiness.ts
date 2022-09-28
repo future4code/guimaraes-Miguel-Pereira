@@ -98,6 +98,10 @@ export class UserBusiness {
         };
 
         const result = await this.userDB.getAllUsers()
+
+        if(!result.length){
+            throw new Error("Nenhum usuário encontrado");
+        }
         return result
        } catch (error: any) {
         throw new CustomError(error.statusCode, error.message);

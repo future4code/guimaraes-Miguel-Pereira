@@ -34,11 +34,13 @@ export class UserDatabase extends BaseDatabase {
 
     //Pegar usuário por algum parâmetro
     //( Consulta ao banco )
-    public getUserByParam = async (param: string): Promise<void> => {
+    public getUserByParam = async (param: string): Promise<{}> => {
         try {
             const result = await UserDatabase.connection(this.TABLE_NAME)
             .select()
             .where({param})
+
+            return result[0]
         } catch (error: any) {
             throw new Error(error.message || error.sqlMessage);
         }

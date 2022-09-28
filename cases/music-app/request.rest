@@ -41,7 +41,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMt
 Content-Type: application/json
 
 {
-"password": "name2"
+"password": "123"
 }
 
 ### Deletar Usuário (ADMIN)
@@ -57,15 +57,15 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMt
 //Endpoints de Playlist
 ### Criar Playlist
 POST http://localhost:3003/playlists/create/af3476ed-3543-44c1-b9e7-aa9fbf1e650d
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMtNDRjMS1iOWU3LWFhOWZiZjFlNjUwZCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDM1ODUzNywiZXhwIjoxNjY0Mzc2NTM3fQ.M_KAsT2k5mlVN9ONT4BqpSx45v00Qd0nVstJY7N0t08
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMtNDRjMS1iOWU3LWFhOWZiZjFlNjUwZCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDM5ODIxNiwiZXhwIjoxNjY0NDE2MjE2fQ.S2bkNa_SyeQx4Nm3sI7bIFoAtIKtPbIOAdCh54G3S68
 Content-Type: application/json
 
 {
-    "name": "Reaggezera",
-    "genre": "Reagge",
-    "musics": "Lado de cá"
+    "name": "Basilidade",
+    "genre": "MPB",
+    "musics": "Burguesinha, Por Você, Partilhar"
 }
 
 ### Pegar Todas Playlists
-GET http://localhost:3003/playlists/af3476ed-3543-44c1-b9e7-aa9fbf1e650d
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMtNDRjMS1iOWU3LWFhOWZiZjFlNjUwZCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDM1ODUzNywiZXhwIjoxNjY0Mzc2NTM3fQ.M_KAsT2k5mlVN9ONT4BqpSx45v00Qd0nVstJY7N0t08
+GET http://localhost:3003/playlists/a0f66358-eb5f-4f70-874d-7ce7034a1c85
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEwZjY2MzU4LWViNWYtNGY3MC04NzRkLTdjZTcwMzRhMWM4NSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNjY0Mzk5NDMzLCJleHAiOjE2NjQ0MTc0MzN9.4T8rseRsoFWmxWnSd8d3IWA87EbJoky3NB5MiffKxBM

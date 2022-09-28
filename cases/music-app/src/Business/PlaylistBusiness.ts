@@ -20,14 +20,17 @@ export class PlaylistBusiness {
         try {
             let {name, genre, musics, user_id} = input;
             const id: string = idGenerator.generateId();
+            const verifyPlaylist = await this.playlistDB.getPlaylistByName(name);
             const tokenData = await authenticator.getTokenData(token);
-            // const verifyPlaylist = await this.playlistDB.getPlaylistById(id)
 
             if(user_id !== tokenData.id){
             throw new InvalidAuthorization();
             };
             if(!name || !genre || !musics || !user_id ){
                 throw new EmptyParams();
+            };
+            if(verifyPlaylist !== undefined && tokenData.id === input.user_id){
+                    throw new Error("Já existe uma playlist com este nome");
             };
 
             const playlist: Playlist = {
@@ -48,7 +51,6 @@ export class PlaylistBusiness {
     public getAllPlaylists = async (userId: string, token: string): Promise<any> => {
         try {
             const tokenData = await authenticator.getTokenData(token);
-            // const verifyPlaylist = await this.playlistDB.getPlaylistById(userId)
 
         if(userId !== tokenData.id){
             throw new InvalidAuthorization();

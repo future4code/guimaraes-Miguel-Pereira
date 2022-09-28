@@ -6,11 +6,11 @@ export class PlaylistDatabase extends BaseDatabase {
 
     //Pegar playlist pelo ID
     //( Consulta ao banco )
-    public getPlaylistById = async (id: string): Promise<void> => {
+    public getPlaylistByName = async (name: string): Promise<{}> => {
         try {
             const result = await PlaylistDatabase.connection(this.TABLE_NAME)
                 .select()
-                .where({ id })
+                .where({ name })
 
             return result[0]
         } catch (error: any) {
