@@ -1,6 +1,6 @@
 import { PlaylistDatabase } from "../Database/PlaylistDatabase";
 import { CustomError } from "../Errors/CustomError";
-import { EmptyParams, InvalidAuthorization } from "../Errors/PlaylistErrors";
+import { EmptyParams, InvalidAuthorization, SamePlaylistName } from "../Errors/PlaylistErrors";
 import { Playlist, PlaylistInputDTO } from "../Models/Playlist";
 import Authenticator from "../Services/Authenticator";
 import IdGenerator from "../Services/GeneratorId";
@@ -30,7 +30,7 @@ export class PlaylistBusiness {
                 throw new EmptyParams();
             };
             if(verifyPlaylist !== undefined && tokenData.id === input.user_id){
-                    throw new Error("Já existe uma playlist com este nome");
+                    throw new SamePlaylistName();
             };
 
             const playlist: Playlist = {

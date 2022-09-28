@@ -15,8 +15,8 @@ POST http://localhost:3003/users/login
 Content-Type: application/json
 
 {
-    "email": "teste@teste.com",
-    "password": "123"
+    "email": "miguel@miguel.com",
+    "password": "admin"
 }
 
 ### Criar Usuário (ADMIN)
@@ -45,8 +45,8 @@ Content-Type: application/json
 }
 
 ### Deletar Usuário (ADMIN)
-DELETE http://localhost:3003/users/delete/a0f358-eb5f-4f70-874d-7ce7034a1c85
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMtNDRjMS1iOWU3LWFhOWZiZjFlNjUwZCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDA2ODAyMywiZXhwIjoxNjY0MDg2MDIzfQ.hTQ_pycNBjM5Iwri7q7mm2KM4QKQSHbWwc0pM9rG7Fw
+DELETE http://localhost:3003/users/delete/a0f66358-eb5f-4f70-874d-7ce7034a1c85
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMtNDRjMS1iOWU3LWFhOWZiZjFlNjUwZCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDQwMDg3NywiZXhwIjoxNjY0NDE4ODc3fQ.nZtwHwNuoNtOPt31n4oQY3FTnFqncWoSYimpxSWgtnA
 
 
 
