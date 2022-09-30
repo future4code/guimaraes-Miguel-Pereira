@@ -1,6 +1,6 @@
 import { PlaylistDatabase } from "../Database/PlaylistDatabase";
 import { CustomError } from "../Errors/CustomError";
-import { EmptyParams, InvalidAuthorization, SamePlaylistName } from "../Errors/PlaylistErrors";
+import { EmptyParams, InvalidAuthorization, PlaylistNotFound, SamePlaylistName } from "../Errors/PlaylistErrors";
 import { Playlist, PlaylistInputDTO } from "../Models/Playlist";
 import Authenticator from "../Services/Authenticator";
 import IdGenerator from "../Services/GeneratorId";
@@ -63,4 +63,24 @@ export class PlaylistBusiness {
             throw new CustomError(error.statusCode, error.message);
         }
     };
+
+    //Deletar playlist
+    public deletePlaylist = async (id: string, userId: string, token: string): Promise<void> => {
+        try {
+            const tokenData = await authenticator.getTokenData(token);
+            const verifyPlaylist = await this.playlistDB.getPlaylistById(id)
+
+        if(userId !== tokenData.id){
+            throw new InvalidAuthorization();
+            };
+        if(!verifyPlaylist){
+            throw new PlaylistNotFound();
+            };
+
+        await this.playlistDB.deletePlaylist(id, userId)
+        
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message);
+        }
+    }
 }

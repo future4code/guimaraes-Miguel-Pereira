@@ -150,13 +150,13 @@ export class UserBusiness {
         try {
             let { id, name, email, password, role } = input;
             const tokenData = await authenticator.getTokenData(token);
-            const editUser = await this.userDB.getUserById(id);
+            const verifyUser = await this.userDB.getUserById(id);
             // const hash = await hashPassword?.generateHash(password)
             
             if (tokenData.role !== UserRole.ADMIN) {
                 throw new InvalidAuthorization();
             };
-            if(!editUser){
+            if(!verifyUser){
                 throw new UserNotFound();
             };
             if(email){
@@ -186,12 +186,11 @@ export class UserBusiness {
     deleteUser = async (input: string, token: string): Promise<void> => {
         try {
             const tokenData = await authenticator.getTokenData(token)
-            const id = await this.userDB.getUserById(input)
-            //Como verificar se um id não existe no banco de dados
+            const verifyUser = await this.userDB.getUserById(input)
             if (tokenData.role !== UserRole.ADMIN) {
                 throw new InvalidAuthorization();
             };
-            if(!id){
+            if(!verifyUser){
                 throw new UserNotFound();
             };
 

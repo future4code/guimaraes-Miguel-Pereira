@@ -13,9 +13,9 @@ export class InvalidAuthorization extends CustomError {
     }
 };
 
-export class UserNotFound extends CustomError {
+export class PlaylistNotFound extends CustomError {
     constructor(){
-        super(404, "Usuário não encontrado.")
+        super(404, "Nenhuma playlist não encontrada.")
     }
 };
 

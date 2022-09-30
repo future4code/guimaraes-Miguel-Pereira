@@ -70,3 +70,10 @@ Content-Type: application/json
 ### Pegar Todas Playlists
 GET http://localhost:3003/playlists/a0f66358-eb5f-4f70-874d-7ce7034a1c85
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEwZjY2MzU4LWViNWYtNGY3MC04NzRkLTdjZTcwMzRhMWM4NSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNjY0Mzk5NDMzLCJleHAiOjE2NjQ0MTc0MzN9.4T8rseRsoFWmxWnSd8d3IWA87EbJoky3NB5MiffKxBM
+
+###Editar Playlist
+PUT http://localhost:3003/playlists/edit/a0f66358-eb5f-4f70-874d-7ce7034a1c85
+
+### Deletar Playlist
+DELETE http://localhost:3003/playlists/delete/af3476ed-3543-44c1-b9e7-aa9fbf1e650d/3131afdf-3721-4df1-bddb-edaacb87bfb0
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMtNDRjMS1iOWU3LWFhOWZiZjFlNjUwZCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDUwODgwNCwiZXhwIjoxNjY0NTI2ODA0fQ.eD2Gz9lfPQDR_0e5P9OR1Mi6XeAzsbooVYG0MasJLXI

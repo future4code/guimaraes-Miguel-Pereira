@@ -38,5 +38,19 @@ export class PlaylistController {
         } catch (error: any) {
             res.status(400).send(error.message);
         }
+    };
+
+    public deletePlaylist = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const userId = req.params.userId
+            const id = req.params.id
+            const token = req.headers.authorization as string
+
+            await this.playlistBusiness.deletePlaylist(id, userId, token)
+
+            res.status(200).send("Playlist deletada.")
+        } catch (error: any) {
+            res.status(400).send(error.message);
+        }
     }
 }

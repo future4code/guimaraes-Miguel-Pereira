@@ -4,13 +4,27 @@ import { BaseDatabase } from "./BaseDatabase";
 export class PlaylistDatabase extends BaseDatabase {
     private TABLE_NAME: string = "Music_Playlist";
 
-    //Pegar playlist pelo ID
+    //Pegar playlist pelo nome
     //( Consulta ao banco )
     public getPlaylistByName = async (name: string): Promise<{}> => {
         try {
             const result = await PlaylistDatabase.connection(this.TABLE_NAME)
                 .select()
                 .where({ name })
+
+            return result[0]
+        } catch (error: any) {
+            throw new Error(error.message || error.sqlMessage);
+        }
+    };
+    
+    //Pegar playlist pelo ID
+    //( Consulta ao banco )
+    public getPlaylistById = async (id: string): Promise<{}> => {
+        try {
+            const result = await PlaylistDatabase.connection(this.TABLE_NAME)
+                .select()
+                .where({ id })
 
             return result[0]
         } catch (error: any) {
@@ -41,6 +55,19 @@ export class PlaylistDatabase extends BaseDatabase {
             .where({user_id: userId})
 
             return result
+        } catch (error: any) {
+            throw new Error(error.message || error.sqlMessage);
+        }
+    };
+
+    public deletePlaylist = async (id: string, userId: string): Promise<void> => {
+        try {
+            await PlaylistDatabase.connection(this.TABLE_NAME)
+            .delete()
+            .where({
+                id,
+                user_id: userId
+            })
         } catch (error: any) {
             throw new Error(error.message || error.sqlMessage);
         }
