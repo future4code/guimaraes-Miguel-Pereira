@@ -64,6 +64,30 @@ export class PlaylistBusiness {
         }
     };
 
+    public editPlaylist = async (input: Playlist, token: string): Promise<void> => {
+        try {
+            let {id, name, genre, musics, user_id } = input
+            const tokenData = await authenticator.getTokenData(token);
+            const verifyPlaylist = await this.playlistDB.getPlaylistById(id)
+            const verifyPlaylistName = await this.playlistDB.getPlaylistByName(name);
+
+            if(user_id !== tokenData.id){
+                throw new InvalidAuthorization();
+            };
+            if(!verifyPlaylist){
+                throw new PlaylistNotFound();
+            };
+            if(verifyPlaylistName !== undefined && tokenData.id === input.user_id){
+                throw new SamePlaylistName();
+            };
+            
+
+            await this.playlistDB.editPlaylist(input)
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message);
+        }
+    };
+
     //Deletar playlist
     public deletePlaylist = async (id: string, userId: string, token: string): Promise<void> => {
         try {
@@ -82,5 +106,5 @@ export class PlaylistBusiness {
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message);
         }
-    }
+    };
 }

@@ -40,6 +40,24 @@ export class PlaylistController {
         }
     };
 
+    public editPlaylist = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const { name, genre, musics } = req.body
+            const user_id = req.params.user_id;
+            const id = req.params.id;
+            const token = req.headers.authorization as string;
+
+            const input = { id, name, genre, musics, user_id }
+            console.log(input)
+
+            await this.playlistBusiness.editPlaylist( input, token )
+
+            res.status(200).send("Dado(s) alterado(s).")
+        } catch (error: any) {
+            res.status(400).send(error.message);
+        }
+    }
+
     public deletePlaylist = async (req: Request, res: Response): Promise<void> => {
         try {
             const userId = req.params.userId

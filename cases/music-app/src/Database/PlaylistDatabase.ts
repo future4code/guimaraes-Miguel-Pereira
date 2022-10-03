@@ -1,4 +1,4 @@
-import { Playlist } from "../Models/Playlist";
+import { Playlist, PlaylistInputDTO } from "../Models/Playlist";
 import { BaseDatabase } from "./BaseDatabase";
 
 export class PlaylistDatabase extends BaseDatabase {
@@ -59,6 +59,25 @@ export class PlaylistDatabase extends BaseDatabase {
             throw new Error(error.message || error.sqlMessage);
         }
     };
+
+    public editPlaylist = async (input: Playlist): Promise<{}> => {
+        try {
+            const result = await PlaylistDatabase.connection(this.TABLE_NAME)
+            .update({
+                name: input.name,
+                genre: input.genre,
+                musics: input.musics
+            })
+            .where({
+                id: input.id,
+                user_id: input.user_id
+            })
+
+            return result
+        } catch (error: any) {
+            throw new Error(error.message || error.sqlMessage); 
+        }
+    }
 
     public deletePlaylist = async (id: string, userId: string): Promise<void> => {
         try {
