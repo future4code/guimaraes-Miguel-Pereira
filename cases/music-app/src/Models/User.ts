@@ -24,7 +24,7 @@ export interface LoginInputDTO {
 };
 
 export interface EditUserInputDTO {
-    id:string,
+    id: string,
     name: string,
     email: string,
     password: string,

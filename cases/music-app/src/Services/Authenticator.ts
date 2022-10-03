@@ -4,10 +4,10 @@ import { AuthenticationData } from "../Models/AuthenticationData";
 export default class Authenticator {
     generateToken = (payload: AuthenticationData): string => {
         const token = jwt.sign(
-            payload, 
-            process.env.JWT_KEY as string, 
+            payload,
+            process.env.JWT_KEY as string,
             {
-            expiresIn: process.env.ACCESS_TOKEN_TIME
+                expiresIn: process.env.ACCESS_TOKEN_TIME
             }
         );
 
@@ -16,7 +16,7 @@ export default class Authenticator {
 
     getTokenData = (token: string): AuthenticationData => {
         const result = jwt.verify(
-            token, 
+            token,
             process.env.JWT_KEY as string) as AuthenticationData;
 
         return result;

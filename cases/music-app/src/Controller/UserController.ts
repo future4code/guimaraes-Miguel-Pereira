@@ -9,6 +9,7 @@ export class UserController {
         this.userBusiness = new UserBusiness();
     };
 
+    //Cadastro
     public signup = async (req: Request, res: Response): Promise<void> => {
         try {
             const input: UserInputDTO = {
@@ -18,7 +19,7 @@ export class UserController {
                 role: req.body.role?.toUpperCase()
             };
 
-            const token = await this.userBusiness.signup(input);
+            const token = await this.userBusiness.signup(input)
 
             res.status(201).send({ message: "Usuário cadastrado!", token });
         } catch (error: any) {
@@ -26,6 +27,7 @@ export class UserController {
         }
     };
 
+    //Login
     public login = async (req: Request, res: Response): Promise<void> => {
         try {
             const { email, password } = req.body;
@@ -35,14 +37,15 @@ export class UserController {
                 password
             };
 
-            const token = await this.userBusiness.login(input);
+            const token = await this.userBusiness.login(input)
 
-            res.status(200).send({ token })
+            res.status(200).send({ token });
         } catch (error: any) {
             res.status(400).send(error.message);
         }
     };
 
+    //Criar usuário
     public createUser = async (req: Request, res: Response): Promise<void> => {
         try {
             const token = req.headers.authorization as string
@@ -52,27 +55,29 @@ export class UserController {
                 password: req.body.password,
                 role: req.body.role?.toUpperCase()
             };
-            
+
             await this.userBusiness.createUser(input, token)
 
-            res.status(201).send("Usuário criado.")
+            res.status(201).send("Usuário criado.");
         } catch (error: any) {
             res.status(400).send(error.message);
         }
     };
 
+    //Pegar todos os usuários
     public getAllUsers = async (req: Request, res: Response): Promise<void> => {
         try {
             const token = req.headers.authorization as string
 
             const result = await this.userBusiness.getAllUsers(token)
 
-            res.status(200).send(result)
+            res.status(200).send(result);
         } catch (error: any) {
             res.status(400).send(error.message);
         }
     };
 
+    //Editar usuário
     public editUser = async (req: Request, res: Response): Promise<void> => {
         try {
             const { name, email, password, role } = req.body
@@ -83,12 +88,13 @@ export class UserController {
 
             await this.userBusiness.editUser(input, token)
 
-            res.status(200).send("Dado(s) alterado(s).")
+            res.status(200).send("Dado(s) alterado(s).");
         } catch (error: any) {
             res.status(400).send(error.message);
         }
     };
 
+    //Deletar usuário
     public deleteUser = async (req: Request, res: Response): Promise<void> => {
         try {
             const { id } = req.params
@@ -96,7 +102,7 @@ export class UserController {
 
             await this.userBusiness.deleteUser(id, token)
 
-            res.status(200).send("Usuário deletado.")
+            res.status(200).send("Usuário deletado.");
         } catch (error: any) {
             res.status(400).send(error.message);
         }

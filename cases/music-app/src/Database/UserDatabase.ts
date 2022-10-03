@@ -37,8 +37,8 @@ export class UserDatabase extends BaseDatabase {
     public getUserByParam = async (param: string): Promise<{}> => {
         try {
             const result = await UserDatabase.connection(this.TABLE_NAME)
-            .select()
-            .where({param})
+                .select()
+                .where({ param })
 
             return result[0]
         } catch (error: any) {
@@ -46,7 +46,7 @@ export class UserDatabase extends BaseDatabase {
         }
     };
 
-    //Pega todos os usuários do banco de dados
+    //Pega todos os usuários
     public getAllUsers = async (): Promise<any> => {
         try {
             const result = await UserDatabase.connection(this.TABLE_NAME)
@@ -101,5 +101,4 @@ export class UserDatabase extends BaseDatabase {
             throw new Error(error.message || error.sqlMessage);
         }
     };
-
 };

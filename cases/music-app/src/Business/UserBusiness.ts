@@ -18,6 +18,7 @@ export class UserBusiness {
         this.userDB = new UserDatabase();
     };
 
+    //Cadastro
     //( Acesso público )
     signup = async (input: UserInputDTO): Promise<string> => {
         try {
@@ -60,6 +61,7 @@ export class UserBusiness {
         }
     };
 
+    //Login
     //( Acesso público )
     login = async (input: LoginInputDTO): Promise<string> => {
         try {
@@ -88,27 +90,31 @@ export class UserBusiness {
         }
     };
 
+    //Pegar Todos os Usuários
     //(Acesso de ADMIN)
-    getAllUsers = async (token: string) :Promise<void> => {
-       try {
-        const tokenData = await authenticator.getTokenData(token)
+    getAllUsers = async (token: string): Promise<void> => {
+        try {
+            const tokenData = await authenticator.getTokenData(token)
 
-        if ( tokenData.role !== UserRole.ADMIN){
-            throw new InvalidAuthorization();
-        };
+            if (tokenData.role !== UserRole.ADMIN) {
+                throw new InvalidAuthorization();
+            };
 
-        const result = await this.userDB.getAllUsers()
+            const result = await this.userDB.getAllUsers()
 
-        if(!result.length){
-            throw new Error("Nenhum usuário encontrado");
+            if (!result.length) {
+                throw new Error("Nenhum usuário encontrado");
+            }
+
+            return result;
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message);
         }
-        return result
-       } catch (error: any) {
-        throw new CustomError(error.statusCode, error.message);
-       }
     };
+
+    //Criar um Novo Usuário
     //(Acesso de ADMIN)
-    createUser = async (input: UserInputDTO, token: string ): Promise<void> => {
+    createUser = async (input: UserInputDTO, token: string): Promise<void> => {
         try {
             let { name, email, password, role } = input;
             const tokenData = await authenticator.getTokenData(token)
@@ -116,7 +122,7 @@ export class UserBusiness {
             const hash = await hashPassword.generateHash(password);
             const verifyEmail = await this.userDB.getUserByEmail(email)
 
-            if ( tokenData.role !== UserRole.ADMIN){
+            if (tokenData.role !== UserRole.ADMIN) {
                 throw new InvalidAuthorization();
             };
             if (!name || !email || !password || !role) {
@@ -144,7 +150,9 @@ export class UserBusiness {
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message);
         }
-    }
+    };
+
+    //Editar um Usuário
     //(Acesso de ADMIN)
     editUser = async (input: EditUserInputDTO, token: string): Promise<void> => {
         try {
@@ -152,36 +160,37 @@ export class UserBusiness {
             const tokenData = await authenticator.getTokenData(token);
             const verifyUser = await this.userDB.getUserById(id);
             // const hash = await hashPassword?.generateHash(password)
-            
+
             if (tokenData.role !== UserRole.ADMIN) {
                 throw new InvalidAuthorization();
             };
-            if(!verifyUser){
+            if (!verifyUser) {
                 throw new UserNotFound();
             };
-            if(email){
-                if(!email.includes("@")){
+            if (email) {
+                if (!email.includes("@")) {
                     throw new InvalidEmailFeature();
                 }
             };
 
-            if(name){
-                if(name.length < 4){
+            if (name) {
+                if (name.length < 4) {
                     throw new ShortName();
                 }
             };
             ///Não está salvando a senha com hash no banco de dados
-            if(password){
-                let hash = await hashPassword.generateHash(password)
-                password === hash
-            };
+            // if (password) {
+            //     let hash = await hashPassword.generateHash(password)
+            //     password === hash
+            // };
 
-            await this.userDB.editUser(input)
+            await this.userDB.editUser(input);
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message);
         }
     };
 
+    //Deletar Usuário
     //(Acesso de ADMIN)
     deleteUser = async (input: string, token: string): Promise<void> => {
         try {
@@ -190,12 +199,11 @@ export class UserBusiness {
             if (tokenData.role !== UserRole.ADMIN) {
                 throw new InvalidAuthorization();
             };
-            if(!verifyUser){
+            if (!verifyUser) {
                 throw new UserNotFound();
             };
 
-            await this.userDB.deleteUser(input)
-
+            await this.userDB.deleteUser(input);
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message);
         }

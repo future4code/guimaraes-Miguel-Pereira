@@ -15,22 +15,22 @@ export class PlaylistBusiness {
         this.playlistDB = new PlaylistDatabase();
     };
 
-    //Criar Playlist de um usuário
+    //Criar Playlist de um Usuário
     public createPlaylist = async (input: PlaylistInputDTO, token: string): Promise<void> => {
         try {
-            let {name, genre, musics, user_id} = input;
+            let { name, genre, musics, user_id } = input;
             const id: string = idGenerator.generateId();
             const verifyPlaylist = await this.playlistDB.getPlaylistByName(name);
             const tokenData = await authenticator.getTokenData(token);
 
-            if(user_id !== tokenData.id){
-            throw new InvalidAuthorization();
+            if (user_id !== tokenData.id) {
+                throw new InvalidAuthorization();
             };
-            if(!name || !genre || !musics || !user_id ){
+            if (!name || !genre || !musics || !user_id) {
                 throw new EmptyParams();
             };
-            if(verifyPlaylist !== undefined && tokenData.id === input.user_id){
-                    throw new SamePlaylistName();
+            if (verifyPlaylist !== undefined && tokenData.id === input.user_id) {
+                throw new SamePlaylistName();
             };
 
             const playlist: Playlist = {
@@ -47,42 +47,43 @@ export class PlaylistBusiness {
         }
     };
 
-    //Pegar todas as playlists de um usuário
+    //Pegar Todas as Playlists de um Usuário
     public getAllPlaylists = async (userId: string, token: string): Promise<any> => {
         try {
             const tokenData = await authenticator.getTokenData(token);
 
-        if(userId !== tokenData.id){
-            throw new InvalidAuthorization();
+            if (userId !== tokenData.id) {
+                throw new InvalidAuthorization();
             };
 
-        const result = await this.playlistDB.getAllPlaylists(userId)
-        return result
+            const result = await this.playlistDB.getAllPlaylists(userId)
+            return result
 
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message);
         }
     };
 
+    //Editar Playlist de um Usuário
     public editPlaylist = async (input: Playlist, token: string): Promise<void> => {
         try {
-            let {id, name, genre, musics, user_id } = input
+            let { id, name, genre, musics, user_id } = input;
             const tokenData = await authenticator.getTokenData(token);
-            const verifyPlaylist = await this.playlistDB.getPlaylistById(id)
+            const verifyPlaylist = await this.playlistDB.getPlaylistById(id);
             const verifyPlaylistName = await this.playlistDB.getPlaylistByName(name);
 
-            if(user_id !== tokenData.id){
+            if (user_id !== tokenData.id) {
                 throw new InvalidAuthorization();
             };
-            if(!verifyPlaylist){
+            if (!verifyPlaylist) {
                 throw new PlaylistNotFound();
             };
-            if(verifyPlaylistName !== undefined && tokenData.id === input.user_id){
+            if (verifyPlaylistName !== undefined && tokenData.id === input.user_id) {
                 throw new SamePlaylistName();
             };
-            
 
-            await this.playlistDB.editPlaylist(input)
+
+            await this.playlistDB.editPlaylist(input);
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message);
         }
@@ -92,17 +93,16 @@ export class PlaylistBusiness {
     public deletePlaylist = async (id: string, userId: string, token: string): Promise<void> => {
         try {
             const tokenData = await authenticator.getTokenData(token);
-            const verifyPlaylist = await this.playlistDB.getPlaylistById(id)
+            const verifyPlaylist = await this.playlistDB.getPlaylistById(id);
 
-        if(userId !== tokenData.id){
-            throw new InvalidAuthorization();
+            if (userId !== tokenData.id) {
+                throw new InvalidAuthorization();
             };
-        if(!verifyPlaylist){
-            throw new PlaylistNotFound();
+            if (!verifyPlaylist) {
+                throw new PlaylistNotFound();
             };
 
-        await this.playlistDB.deletePlaylist(id, userId)
-        
+            await this.playlistDB.deletePlaylist(id, userId);
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message);
         }

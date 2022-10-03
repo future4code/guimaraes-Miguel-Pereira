@@ -30,16 +30,18 @@ export class PlaylistController {
     //Pegar todas as Playlists
     public getAllPlaylists = async (req: Request, res: Response): Promise<void> => {
         try {
-           const userId = req.params.userId
-           const token = req.headers.authorization as string
+            const userId = req.params.userId
+            const token = req.headers.authorization as string
 
-           const result = await this.playlistBusiness.getAllPlaylists(userId, token)
-           res.status(200).send(result)
+            const result = await this.playlistBusiness.getAllPlaylists(userId, token)
+
+            res.status(200).send(result)
         } catch (error: any) {
             res.status(400).send(error.message);
         }
     };
 
+    //Editar Playlist
     public editPlaylist = async (req: Request, res: Response): Promise<void> => {
         try {
             const { name, genre, musics } = req.body
@@ -50,14 +52,15 @@ export class PlaylistController {
             const input = { id, name, genre, musics, user_id }
             console.log(input)
 
-            await this.playlistBusiness.editPlaylist( input, token )
+            await this.playlistBusiness.editPlaylist(input, token)
 
             res.status(200).send("Dado(s) alterado(s).")
         } catch (error: any) {
             res.status(400).send(error.message);
         }
-    }
+    };
 
+    //Deleta Playlist
     public deletePlaylist = async (req: Request, res: Response): Promise<void> => {
         try {
             const userId = req.params.userId
@@ -70,5 +73,5 @@ export class PlaylistController {
         } catch (error: any) {
             res.status(400).send(error.message);
         }
-    }
+    };
 }

@@ -21,7 +21,7 @@ export class InvalidPassword extends CustomError {
 export class ShortName extends CustomError {
     constructor()
     {
-        super(406, "O nome deve conter pelo menos 4 caractéres.")
+        super(406, "O nome deve conter pelo menos 4 caracteres.")
     }
 };
 
@@ -33,24 +33,24 @@ export class InvalidEmailFeature extends CustomError {
 
 export class EmptyParams extends CustomError {
     constructor(){
-        super(401, "Algum campo obrigatório está vazio.")
+        super(401, "Algum campo obrigatório (name, email, password) está vazio.")
     }
 };
 
 export class EmailAlreadExistis extends CustomError {
     constructor(){
-        super(409,"Email já cadastrado.")
+        super(409,"Este email já está cadastrado.")
     }
 };
 
 export class InvalidAuthorization extends CustomError {
     constructor(){
-        super(401, "Acesso não autorizado")
+        super(401, "Acesso não autorizado!")
     }
 };
 
 export class UserNotFound extends CustomError {
     constructor(){
-        super(404, "Usuário não encontrado")
+        super(404, "Usuário não encontrado!")
     }
 };
