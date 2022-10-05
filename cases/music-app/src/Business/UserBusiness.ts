@@ -156,10 +156,9 @@ export class UserBusiness {
     //(Acesso de ADMIN)
     editUser = async (input: EditUserInputDTO, token: string): Promise<void> => {
         try {
-            let { id, name, email, password, role } = input;
+            let { id, name, role } = input;
             const tokenData = await authenticator.getTokenData(token);
             const verifyUser = await this.userDB.getUserById(id);
-            // const hash = await hashPassword?.generateHash(password)
 
             if (tokenData.role !== UserRole.ADMIN) {
                 throw new InvalidAuthorization();
@@ -167,22 +166,11 @@ export class UserBusiness {
             if (!verifyUser) {
                 throw new UserNotFound();
             };
-            if (email) {
-                if (!email.includes("@")) {
-                    throw new InvalidEmailFeature();
-                }
-            };
-
             if (name) {
                 if (name.length < 4) {
                     throw new ShortName();
                 }
             };
-            ///Não está salvando a senha com hash no banco de dados
-            // if (password) {
-            //     let hash = await hashPassword.generateHash(password)
-            //     password === hash
-            // };
 
             await this.userDB.editUser(input);
         } catch (error: any) {

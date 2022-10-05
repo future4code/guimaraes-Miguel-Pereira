@@ -76,8 +76,6 @@ export class UserDatabase extends BaseDatabase {
             const result = await UserDatabase.connection(this.TABLE_NAME)
                 .update({
                     name: input.name,
-                    email: input.email,
-                    password: input.password,
                     role: input.role
                 })
                 .where({ id: input.id })

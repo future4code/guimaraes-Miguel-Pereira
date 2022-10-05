@@ -15,38 +15,38 @@ POST http://localhost:3003/users/login
 Content-Type: application/json
 
 {
-    "email": "teste@teste.com",
-    "password": "123"
+    "email": "miguel@miguel.com",
+    "password": "admin"
 }
 
 ### Criar Usuário (ADMIN)
 POST http://localhost:3003/users/create
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMtNDRjMS1iOWU3LWFhOWZiZjFlNjUwZCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDA2ODAyMywiZXhwIjoxNjY0MDg2MDIzfQ.hTQ_pycNBjM5Iwri7q7mm2KM4QKQSHbWwc0pM9rG7Fw
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMtNDRjMS1iOWU3LWFhOWZiZjFlNjUwZCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NTAxMjMyNCwiZXhwIjoxNjY1MDMwMzI0fQ.efYzQT_8_zuwnE1HPDKvJa8WqH4kXNLBApgfnKO_JY8
 Content-Type: application/json
 
 {
-    "name": "teste",
-    "email": "teste@teste.com",
-    "password": "123",
+    "name": "Gaby",
+    "email": "gaby@bueno.com",
+    "password": "admin2",
     "role": "admin"
 }
 
 ### Pegar Todos Os Usuários (ADMIN)
 GET http://localhost:3003/users
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMtNDRjMS1iOWU3LWFhOWZiZjFlNjUwZCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDc2NTQ0MCwiZXhwIjoxNjY0NzgzNDQwfQ.jAqXUJ7y0isoCTBKO0XowQ5iaRBD8dwQ_eKwisf6O8k
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMtNDRjMS1iOWU3LWFhOWZiZjFlNjUwZCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NTAxMjMyNCwiZXhwIjoxNjY1MDMwMzI0fQ.efYzQT_8_zuwnE1HPDKvJa8WqH4kXNLBApgfnKO_JY8
 
 ### Editar Usuário (ADMIN)
-PUT  http://localhost:3003/users/edit/321232dc-a903-4a87-b07a-11bc9a1de9be
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMtNDRjMS1iOWU3LWFhOWZiZjFlNjUwZCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDc2ODA2NiwiZXhwIjoxNjY0Nzg2MDY2fQ.gUflXWG2JJF5tzKCIs_Mus4PUjCx_8ig9Xqdy-xNUPE
+PUT  http://localhost:3003/users/edit/23994ddd-8e67-4605-af72-b25b89b34fb0
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMtNDRjMS1iOWU3LWFhOWZiZjFlNjUwZCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NTAxMjMyNCwiZXhwIjoxNjY1MDMwMzI0fQ.efYzQT_8_zuwnE1HPDKvJa8WqH4kXNLBApgfnKO_JY8
 Content-Type: application/json
 
 {
-"password": "123"
+"name": "Lennon"
 }
 
 ### Deletar Usuário (ADMIN)
-DELETE http://localhost:3003/users/delete/a0f66358-eb5f-4f70-874d-7ce7034a1c85
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMtNDRjMS1iOWU3LWFhOWZiZjFlNjUwZCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NDQwMDg3NywiZXhwIjoxNjY0NDE4ODc3fQ.nZtwHwNuoNtOPt31n4oQY3FTnFqncWoSYimpxSWgtnA
+DELETE http://localhost:3003/users/delete/321232dc-a903-4a87-b07a-11bc9a1de9be
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmMzQ3NmVkLTM1NDMtNDRjMS1iOWU3LWFhOWZiZjFlNjUwZCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY2NTAxMjMyNCwiZXhwIjoxNjY1MDMwMzI0fQ.efYzQT_8_zuwnE1HPDKvJa8WqH4kXNLBApgfnKO_JY8
 
 
 

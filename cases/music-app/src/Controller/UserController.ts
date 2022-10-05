@@ -80,11 +80,11 @@ export class UserController {
     //Editar usuário
     public editUser = async (req: Request, res: Response): Promise<void> => {
         try {
-            const { name, email, password, role } = req.body
+            const { name, role } = req.body
             const { id } = req.params
             const token = req.headers.authorization as string
 
-            const input = { name, email, password, role, id }
+            const input = { name, role, id }
 
             await this.userBusiness.editUser(input, token)
 
