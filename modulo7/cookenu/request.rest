@@ -1,0 +1,34 @@
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+"name": "Miguel",
+"email": "mig@admin.com",
+"password": "admin"
+}
+
+###
+
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "mig@admin.com",
+    "password": "admin"
+}
+
+###
+
+GET http://localhost:3003/users/profile 
+authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkNmJmMzAzLTMyY2ItNDllMi1hNzVjLWFmNDQwYTE0YjMzMyIsImlhdCI6MTY2MjE1NTk3MCwiZXhwIjoxNjYyMTU5NTcwfQ.d283NsIJ1YjWuy8yEfRNfyrfrbkG-_FqVQh04KqH3go
+
+###
+
+GET http://localhost:3003/users/70461123-b93a-4377-8eee-42f58d5fbb17
+authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlkNmJmMzAzLTMyY2ItNDllMi1hNzVjLWFmNDQwYTE0YjMzMyIsImlhdCI6MTY2MjE1NTk3MCwiZXhwIjoxNjYyMTU5NTcwfQ.d283NsIJ1YjWuy8yEfRNfyrfrbkG-_FqVQh04KqH3go
+
+###
+
+GET http://localhost:3003/users
+
+###
