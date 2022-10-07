@@ -29,7 +29,22 @@ export class ProductsBusiness {
                 tags
             }
 
-            await this.productsDB.CreateProduct(products);
+            await this.productsDB.InsertProduct(products);
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message);
+        }
+    };
+
+    public searchProductsByNameOrTags = async(input: string): Promise<{}> => {
+        try {
+
+            if(!input){
+                input = "%"
+            };
+
+            const result  = await this.productsDB.searchProductsByNameOrTags(input)
+
+            return result;
         } catch (error: any) {
             throw new CustomError(error.statusCode, error.message);
         }

@@ -22,4 +22,15 @@ export class ProductsController {
             res.status(400).send(error.message);
         }
     };
+
+    public searchProductsByNameOrTags = async(req: Request, res: Response): Promise<void> => {
+        try {
+            let input = req.query.search as string
+            const result = await this.productsBusiness.searchProductsByNameOrTags(input)
+
+            res.status(200).send(result);
+        } catch (error: any) {
+            res.status(400).send(error.message);
+        }
+    };
 }
