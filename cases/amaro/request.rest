@@ -1,0 +1,7 @@
+POST http://localhost:3003/products/create
+Content-Type: application/json
+
+{
+    "name": "luva",
+    "tags": "estilo, mão, mãos, grife, inverno"
+}
