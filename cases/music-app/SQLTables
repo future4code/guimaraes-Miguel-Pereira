@@ -1,0 +1,24 @@
+User table:
+
+create table if not exists  Music_User (
+id VARCHAR(250) PRIMARY KEY,
+name VARCHAR(150) NOT NULL,
+email VARCHAR(150) UNIQUE NOT NULL,
+password VARCHAR(300) NOT NULL,
+role ENUM("ADMIN", "USER") DEFAULT "USER"
+);
+
+-----------
+
+Musics Table:
+
+create table if not exists  Music_Playlist (
+id VARCHAR(250) PRIMARY KEY,
+name VARCHAR(150) NOT NULL,
+genre VARCHAR(150) NOT NULL,
+musics VARCHAR(300) NOT NULL,
+user_id VARCHAR(250),
+FOREIGN KEY (user_id) REFERENCES Music_User(id)
+ON DELETE CASCADE
+ON UPDATE CASCADE
+);
