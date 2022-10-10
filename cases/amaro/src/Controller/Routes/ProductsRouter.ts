@@ -8,4 +8,4 @@ const productsController = new ProductsController();
 //Create Product
 productsRouter.post("/create", productsController.createProduct)
 //Get Products By Query
-productsRouter.get("/", productsController.searchProductsByNameOrTags)
+productsRouter.get("/", productsController.searchProducts)

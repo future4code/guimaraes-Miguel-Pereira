@@ -1,5 +1,6 @@
 import { ProductsDatabase } from "../Database/ProductsDatabase";
 import { CustomError } from "../Error/CustomError";
+import { InvalidParams, ProductNotFound, ShortName } from "../Error/ProductsError";
 import { Products, ProductsInputDTO } from "../Model/Products";
 import GenerateId from "../Services/GenerateId";
 
@@ -17,10 +18,10 @@ export class ProductsBusiness {
             const id: string = idGenerator.generateId();
 
             if(!name || !tags){
-                throw new Error("Algum campo obrigatório está vazio!");
+                throw new InvalidParams();
             };
             if(name.length < 4){
-                throw new Error("Nome muito curto! Min. 4 caracteres.");
+                throw new ShortName();
             };
 
             const products: Products = {
@@ -35,14 +36,18 @@ export class ProductsBusiness {
         }
     };
 
-    public searchProductsByNameOrTags = async(input: string): Promise<{}> => {
+    public searchProducts = async(input: string): Promise<{}> => {
         try {
 
             if(!input){
                 input = "%"
             };
 
-            const result  = await this.productsDB.searchProductsByNameOrTags(input)
+            const result  = await this.productsDB.searchProducts(input)
+
+            if(!result.length){
+                throw new ProductNotFound();
+            };
 
             return result;
         } catch (error: any) {

@@ -17,7 +17,7 @@ export class ProductsDatabase extends BaseDatabase {
         }
     };
 
-    public searchProductsByNameOrTags = async (input: string): Promise<{}> => {
+    public searchProducts = async (input: string): Promise<any> => {
         try {
            const result =  await ProductsDatabase.connection(this.TABLE_NAME)
             .select('*')
