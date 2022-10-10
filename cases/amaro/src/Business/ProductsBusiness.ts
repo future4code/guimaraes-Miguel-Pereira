@@ -36,7 +36,7 @@ export class ProductsBusiness {
         }
     };
 
-    public searchProducts = async(input: string): Promise<{}> => {
+    public searchProducts = async(input: string): Promise<[]> => {
         try {
 
             if(!input){
@@ -44,6 +44,21 @@ export class ProductsBusiness {
             };
 
             const result  = await this.productsDB.searchProducts(input)
+
+            if(!result.length){
+                throw new ProductNotFound();
+            };
+
+            return result;
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message);
+        }
+    };
+
+    public getProductById = async(id: string): Promise<{}> => {
+        try {
+            
+            const result = await this.productsDB.getProductById(id)
 
             if(!result.length){
                 throw new ProductNotFound();

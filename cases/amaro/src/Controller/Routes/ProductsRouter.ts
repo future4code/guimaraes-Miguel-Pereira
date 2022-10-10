@@ -7,5 +7,7 @@ const productsController = new ProductsController();
 
 //Create Product
 productsRouter.post("/create", productsController.createProduct)
-//Get Products By Query
+//Get Products
 productsRouter.get("/", productsController.searchProducts)
+//Get Products By Id
+productsRouter.get("/search/:id", productsController.getProductById)
