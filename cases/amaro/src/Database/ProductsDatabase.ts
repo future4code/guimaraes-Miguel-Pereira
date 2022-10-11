@@ -42,4 +42,21 @@ export class ProductsDatabase extends BaseDatabase {
             throw new Error(error.message || error.sqlMessage);  
         }
     };
+
+
+
+
+
+
+
+
+    public deleteProduct = async(id: string): Promise<void> => {
+        try {
+            await ProductsDatabase.connection(this.TABLE_NAME)
+            .delete()
+            .where({id});
+        } catch (error: any) {
+            throw new Error(error.message || error.sqlMessage);   
+        }
+    };
 }

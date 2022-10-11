@@ -9,5 +9,7 @@ const productsController = new ProductsController();
 productsRouter.post("/create", productsController.createProduct)
 //Get Products
 productsRouter.get("/", productsController.searchProducts)
-//Get Products By Id
+//Get Product By Id
 productsRouter.get("/search/:id", productsController.getProductById)
+//Delete Product By Id
+productsRouter.delete("/delete/:id", productsController.deleteProduct)

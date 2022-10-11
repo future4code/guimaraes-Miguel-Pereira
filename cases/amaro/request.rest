@@ -12,3 +12,6 @@ GET http://localhost:3003/products
 
 ### Pegar produto pelo ID
 GET http://localhost:3003/products/search/a6ca4191-2bab-4a59-88dc-5f94f41aa219
+
+### Deletar produto pelo ID
+DELETE http://localhost:3003/products/delete/a6ca4191-2bab-4a59-88dc-5f94f41aa219

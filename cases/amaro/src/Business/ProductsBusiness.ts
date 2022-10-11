@@ -69,4 +69,19 @@ export class ProductsBusiness {
             throw new CustomError(error.statusCode, error.message);
         }
     };
+
+    public deleteProduct = async(id: string): Promise<void> => {
+        try {
+            const verifyProduct = await this.productsDB.getProductById(id)
+
+            if(!verifyProduct.length){
+                throw new ProductNotFound();
+            };
+            
+            
+            await this.productsDB.deleteProduct(id);
+        } catch (error: any) {
+            throw new CustomError(error.statusCode, error.message);
+        }
+    };
 }

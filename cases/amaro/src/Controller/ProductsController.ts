@@ -45,4 +45,16 @@ export class ProductsController {
             res.status(400).send(error.message);
         }
     };
+
+    public deleteProduct = async( req: Request, res: Response): Promise<void> => {
+        try {
+            let id = req.params.id
+
+            await this.productsBusiness.deleteProduct(id)
+
+            res.status(200).send("Produto deletado!");
+        } catch (error: any) {
+            res.status(400).send(error.message);
+        }
+    };
 }
