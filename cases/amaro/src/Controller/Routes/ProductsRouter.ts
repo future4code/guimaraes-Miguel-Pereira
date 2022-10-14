@@ -5,6 +5,8 @@ export const productsRouter = express.Router();
 
 const productsController = new ProductsController();
 
+//Insert Products JSON
+productsRouter.post("/insert", productsController.InsertProductsJSON)
 //Create Product
 productsRouter.post("/create", productsController.createProduct)
 //Get Products

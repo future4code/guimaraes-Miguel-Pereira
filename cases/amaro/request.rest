@@ -1,3 +1,6 @@
+###Inser os produtos do arquivo JSON
+POST http://localhost:3003/products/insert
+Content-Type: application/json
 ### Adicionar Produtos
 POST http://localhost:3003/products/create
 Content-Type: application/json
@@ -8,7 +11,7 @@ Content-Type: application/json
 }
 
 ### Pegar todos os produtos / definir parâmetro
-GET http://localhost:3003/products
+GET http://localhost:3003/products?search=metal
 
 ### Pegar produto pelo ID
 GET http://localhost:3003/products/search/a6ca4191-2bab-4a59-88dc-5f94f41aa219

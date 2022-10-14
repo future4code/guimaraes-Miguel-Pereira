@@ -8,3 +8,9 @@ export interface ProductsInputDTO {
     name: string,
     tags: string[]
 };
+
+export interface ProductsDTO {
+    id: string,
+    name: string,
+    tags: string[]
+};
