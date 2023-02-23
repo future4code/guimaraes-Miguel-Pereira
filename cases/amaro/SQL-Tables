@@ -1,0 +1,9 @@
+Products Table:
+
+create table if not exists Amaro_Products (
+id VARCHAR (250) PRIMARY KEY,
+name VARCHAR (100) NOT NULL,
+tags VARCHAR (250) NOT NULL
+);
+
+---------------------------------------------------------------------------------------------------------------
